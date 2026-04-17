@@ -2,6 +2,7 @@
 
 const express = require("express");
 const path = require("path");
+const { sendError } = require("./sendError");
 const {
   getPublicAppConfig,
   toPublicConfigScript
@@ -17,20 +18,6 @@ const {
 /** @typedef {import("express").Application} Application */
 /** @typedef {import("express").Request} Request */
 /** @typedef {import("express").Response} Response */
-
-/**
- * @param {Response} res
- * @param {{ statusCode?: number; message?: string; userMessage?: string | null; code?: string; details?: string | null } | null | undefined} error
- * @returns {void}
- */
-function sendError(res, error) {
-  res.status(error && error.statusCode ? error.statusCode : 500).json({
-    error: error && error.message ? error.message : "Unexpected server error",
-    userMessage: error && error.userMessage ? error.userMessage : null,
-    code: error && error.code ? error.code : "INTERNAL_ERROR",
-    details: error && error.details ? error.details : null
-  });
-}
 
 /**
  * @returns {Application}
