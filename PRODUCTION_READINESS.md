@@ -354,7 +354,9 @@ Progress:
 - DONE: backend HTTP error response boundary migrated to TypeScript source with a compatibility shim
 - DONE: backend app-config response boundary migrated to TypeScript source with a compatibility shim
 - DONE: backend JSON response handler boundary migrated to TypeScript source with a compatibility shim
-- TODO: migrate the backend app creation boundary or route DTO mappers to TypeScript next
+- DONE: backend root document response boundary migrated to TypeScript source with a compatibility shim
+- DONE: backend request and route input normalization migrated to TypeScript source with a compatibility shim
+- TODO: migrate the backend app creation boundary next, now that route payload normalization is extracted
 
 ### M7 - Configuration and secrets management
 
@@ -585,6 +587,7 @@ Use this section to record actual movement.
 | 2026-04-17 | M6        | Converted shared runtime config to TypeScript source while keeping a runtime compatibility shim      | DONE   |
 | 2026-04-17 | M6        | Migrated the app-config response boundary to TypeScript source with a compatibility shim             | DONE   |
 | 2026-04-17 | M6        | Migrated the JSON response handler boundary to TypeScript source with a compatibility shim           | DONE   |
+| 2026-04-17 | M6        | Migrated the root document response boundary to TypeScript source with a compatibility shim          | DONE   |
 | 2026-04-17 | M6        | Migrated the provider-failure backend module to TypeScript source with a compatibility shim          | DONE   |
 | 2026-04-17 | M6        | Migrated the HTTP error response boundary to TypeScript source with a compatibility shim             | DONE   |
 

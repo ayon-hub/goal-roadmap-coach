@@ -1,6 +1,7 @@
 const suites = [
   require("./flowService.test"),
   require("./progressService.test"),
+  require("./httpRequestInput.test"),
   require("./http.test"),
   require("./ollamaClient.test")
 ];

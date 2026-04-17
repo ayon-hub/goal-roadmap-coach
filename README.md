@@ -74,6 +74,8 @@ goal-roadmap-coach/
 - `backend/src/infrastructure/http/sendError.ts` is the next typed backend HTTP boundary module
 - `backend/src/infrastructure/http/sendPublicAppConfig.ts` now owns the typed runtime config response path
 - `backend/src/infrastructure/http/sendJsonResult.ts` now owns typed JSON response handling for route promises
+- `backend/src/infrastructure/http/sendIndexHtml.ts` now owns the typed root document response path
+- `backend/src/infrastructure/http/getProgressRequestInput.ts` now owns typed route and body normalization before services run
 
 ## Current flow
 
