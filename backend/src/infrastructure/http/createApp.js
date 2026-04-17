@@ -3,10 +3,7 @@
 const express = require("express");
 const path = require("path");
 const { sendError } = require("./sendError");
-const {
-  getPublicAppConfig,
-  toPublicConfigScript
-} = require("../../../../shared/config/publicAppConfig");
+const { sendPublicAppConfig } = require("./sendPublicAppConfig");
 const {
   getGoalExperience,
   getGoalExperienceFromText,
@@ -29,8 +26,7 @@ function createApp() {
   app.use(express.json());
   /** @param {Request} req @param {Response} res */
   app.get("/app-config.js", (req, res) => {
-    res.type("application/javascript");
-    res.send(toPublicConfigScript(getPublicAppConfig()));
+    sendPublicAppConfig(res);
   });
   app.use(express.static(publicPath));
 
