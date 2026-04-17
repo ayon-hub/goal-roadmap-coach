@@ -37,10 +37,10 @@ Current focus:
 
 Next immediate step:
 
-1. Configure Git identity and create the first baseline commit.
-2. Create the GitHub repository and add `origin`.
+1. Create the GitHub repository and add `origin`.
+2. Push local `main` to GitHub.
 3. Protect the `main` branch and require pull requests.
-4. Move to M2 and formalize the repo hygiene files already added locally.
+4. Start M2 and formalize repo hygiene as the active milestone.
 
 ## Milestone Tracker
 
@@ -95,8 +95,9 @@ Progress:
 - DONE: contribution and branch/commit conventions documented
 - DONE: baseline repo hygiene files added for a clean initial commit
 - DONE: package and product naming normalized to `goal-roadmap-coach`
-- BLOCKED: create first baseline commit until Git `user.name` and `user.email` are configured
+- DONE: first baseline commit created on `main`
 - BLOCKED: create GitHub repository and configure `origin`
+- BLOCKED: push local `main` to GitHub
 - BLOCKED: enable branch protection rules on GitHub
 
 Suggested conventions:
@@ -516,6 +517,7 @@ Use this section to record actual movement.
 | 2026-04-17 | M1 | Added contribution rules for branching, PRs, and commit conventions | DONE |
 | 2026-04-17 | M1 | Added baseline `.gitignore`, `.nvmrc`, and `.editorconfig` for a clean repository start | DONE |
 | 2026-04-17 | M1 | Renamed package baseline to `goal-roadmap-coach` | DONE |
+| 2026-04-17 | M1 | Created initial baseline commit on `main` | DONE |
 
 ## Notes and Risks
 
