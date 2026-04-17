@@ -73,6 +73,7 @@ goal-roadmap-coach/
 - `backend/src/application/progress/providerFailure.ts` is the first backend module migrated to TypeScript source
 - `backend/src/infrastructure/http/sendError.ts` is the next typed backend HTTP boundary module
 - `backend/src/infrastructure/http/sendPublicAppConfig.ts` now owns the typed runtime config response path
+- `backend/src/infrastructure/http/sendJsonResult.ts` now owns typed JSON response handling for route promises
 
 ## Current flow
 

@@ -2,8 +2,8 @@
 
 const express = require("express");
 const path = require("path");
-const { sendError } = require("./sendError");
 const { sendPublicAppConfig } = require("./sendPublicAppConfig");
+const { sendJsonResult } = require("./sendJsonResult");
 const {
   getGoalExperience,
   getGoalExperienceFromText,
@@ -32,57 +32,30 @@ function createApp() {
 
   /** @param {Request} req @param {Response} res */
   app.get("/api/progress/config", (req, res) => {
-    getInitialQuestionnaire()
-      .then((result) => {
-        res.json(result);
-      })
-      .catch((error) => {
-        sendError(res, error);
-      });
+    sendJsonResult(res, getInitialQuestionnaire());
   });
 
   /** @param {Request} req @param {Response} res */
   app.get("/api/progress/goals/:goalKey", (req, res) => {
-    getGoalExperience(req.params.goalKey)
-      .then((result) => {
-        res.json(result);
-      })
-      .catch((error) => {
-        sendError(res, error);
-      });
+    sendJsonResult(res, getGoalExperience(req.params.goalKey));
   });
 
   /** @param {Request} req @param {Response} res */
   app.post("/api/progress/goal-plan", (req, res) => {
-    getGoalExperienceFromText(req.body && req.body.goalText ? req.body.goalText : "")
-      .then((result) => {
-        res.json(result);
-      })
-      .catch((error) => {
-        sendError(res, error);
-      });
+    sendJsonResult(
+      res,
+      getGoalExperienceFromText(req.body && req.body.goalText ? req.body.goalText : "")
+    );
   });
 
   /** @param {Request} req @param {Response} res */
   app.post("/api/progress/suggestions", (req, res) => {
-    buildSuggestedProfile(req.body || {})
-      .then((result) => {
-        res.json(result);
-      })
-      .catch((error) => {
-        sendError(res, error);
-      });
+    sendJsonResult(res, buildSuggestedProfile(req.body || {}));
   });
 
   /** @param {Request} req @param {Response} res */
   app.post("/api/progress/evaluations", (req, res) => {
-    evaluateProfile(req.body || { positiveFactors: [], constraints: [] })
-      .then((result) => {
-        res.json(result);
-      })
-      .catch((error) => {
-        sendError(res, error);
-      });
+    sendJsonResult(res, evaluateProfile(req.body || { positiveFactors: [], constraints: [] }));
   });
 
   /** @param {Request} req @param {Response} res */
