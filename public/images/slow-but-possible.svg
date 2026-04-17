@@ -1,0 +1,14 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="36" fill="#FFF7E9"/>
+  <path d="M128 392C251.5 348.5 366 326 480 326C594 326 708.5 348.5 832 392" stroke="#C98A4C" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="304" cy="240" r="64" fill="#F2D4A5"/>
+  <rect x="266" y="304" width="82" height="112" rx="28" fill="#D88B52"/>
+  <path d="M307 337L261 382" stroke="#8B4E2B" stroke-width="18" stroke-linecap="round"/>
+  <path d="M322 404L287 456" stroke="#8B4E2B" stroke-width="18" stroke-linecap="round"/>
+  <path d="M333 338L390 374" stroke="#8B4E2B" stroke-width="18" stroke-linecap="round"/>
+  <path d="M346 404L384 456" stroke="#8B4E2B" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="664" cy="186" r="78" fill="#FFE5B7"/>
+  <path d="M664 128V244" stroke="#C98A4C" stroke-width="16" stroke-linecap="round"/>
+  <path d="M608 186H720" stroke="#C98A4C" stroke-width="16" stroke-linecap="round"/>
+  <text x="480" y="480" text-anchor="middle" fill="#8B4E2B" font-family="Trebuchet MS, sans-serif" font-size="38" font-weight="700">Slow but Possible</text>
+</svg>

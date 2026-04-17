@@ -1,0 +1,14 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="36" fill="#FFF3EA"/>
+  <circle cx="166" cy="118" r="54" fill="#F7D1B8"/>
+  <path d="M162 271C162 214.667 207.667 169 264 169H676C732.333 169 778 214.667 778 271V301C778 357.333 732.333 403 676 403H264C207.667 403 162 357.333 162 301V271Z" fill="#F0D4C0"/>
+  <rect x="217" y="220" width="506" height="132" rx="26" fill="#FFFDFC"/>
+  <path d="M309 290C309 252.997 338.997 223 376 223H583C620.003 223 650 252.997 650 290V292C650 329.003 620.003 359 583 359H376C338.997 359 309 329.003 309 292V290Z" fill="#FDE5D7"/>
+  <path d="M354 278C354 255.909 371.909 238 394 238H565C587.091 238 605 255.909 605 278V304C605 326.091 587.091 344 565 344H394C371.909 344 354 326.091 354 304V278Z" fill="#ECAE87"/>
+  <circle cx="433" cy="289" r="15" fill="#7B4B32"/>
+  <circle cx="529" cy="289" r="15" fill="#7B4B32"/>
+  <path d="M428 322C445.096 308.618 470.717 304.057 485 304.057C499.283 304.057 524.904 308.618 542 322" stroke="#7B4B32" stroke-width="10" stroke-linecap="round"/>
+  <path d="M273 153L333 95" stroke="#D67B53" stroke-width="16" stroke-linecap="round"/>
+  <path d="M693 154L633 96" stroke="#D67B53" stroke-width="16" stroke-linecap="round"/>
+  <text x="480" y="467" text-anchor="middle" fill="#7B4B32" font-family="Trebuchet MS, sans-serif" font-size="38" font-weight="700">Very Low Progress</text>
+</svg>

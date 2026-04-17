@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goal Roadmap Coach</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div class="hero-topbar">
+          <div class="hero-copy">
+            <p class="eyebrow">Goal Roadmap Coach</p>
+            <h1>Start With A Goal, Then Build The Plan</h1>
+            <p class="intro">
+              Start with a goal in your own words. The app then suggests a matching question set,
+              goal-specific resources, likely obstacles, and a deterministic final result.
+            </p>
+          </div>
+
+          <label class="theme-switcher" for="themeSelect">
+            <span class="theme-switcher-label">Theme</span>
+            <select id="themeSelect" aria-label="Select theme">
+              <option value="mild-light">Mild Light</option>
+              <option value="cream">Cream</option>
+              <option value="dark" selected>Dark</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="app-shell">
+        <div class="panel flow-panel">
+          <div class="flow-header">
+            <div>
+              <p class="eyebrow">Guided Flow</p>
+              <h2 id="stepTitle">Describe The Goal You Want To Move Forward</h2>
+            </div>
+            <p class="panel-text" id="stepDescription">
+              Start with a short goal statement. After you continue, the app suggests the next step.
+            </p>
+          </div>
+
+          <nav class="breadcrumb" id="breadcrumb" aria-label="Progress flow steps"></nav>
+
+          <section class="step-card" id="stepContent">
+            <div id="goalStep" class="step-pane"></div>
+
+            <div id="questionStep" class="step-pane" hidden></div>
+
+            <div id="resourceStep" class="step-pane" hidden>
+              <div class="section-header">
+                <h3>Goal Resources</h3>
+                <p class="section-text" id="resourceIntro">
+                  Adjust the goal-specific resources and use the note boxes for future AI calls.
+                </p>
+              </div>
+              <div id="positiveSliders" class="slider-list"></div>
+            </div>
+
+            <div id="obstacleStep" class="step-pane" hidden>
+              <div class="section-header">
+                <h3>Goal Obstacles</h3>
+                <p class="section-text">
+                  Review the suggested obstacles, then add your own blockers in text fields if needed.
+                </p>
+              </div>
+              <div id="constraintOptions" class="constraint-options"></div>
+              <div class="section-header">
+                <h3>Your Obstacles</h3>
+                <p class="section-text">
+                  Add personal obstacles one by one. Only the ones you fill in will count.
+                </p>
+              </div>
+              <div id="customObstacleList" class="slider-list"></div>
+              <button id="addObstacleButton" class="action-button action-button-secondary" type="button">
+                Add Obstacle
+              </button>
+              <div id="constraintSliders" class="slider-list"></div>
+            </div>
+
+            <div id="resultStep" class="step-pane" hidden>
+              <div class="section-header">
+                <h3>Input Recap</h3>
+                <p class="section-text">
+                  Review all selected inputs before deciding whether the point-based result feels useful.
+                </p>
+              </div>
+
+              <div class="summary-card step-summary">
+                <h3>Accordion Summary</h3>
+                <div id="answerSummary" class="answer-summary"></div>
+              </div>
+            </div>
+          </section>
+
+          <div class="flow-actions">
+            <div id="stepLoader" class="step-loader" hidden>
+              <span class="loader-dot" aria-hidden="true"></span>
+              <span id="stepLoaderText">Working on your next step...</span>
+            </div>
+            <button id="backButton" class="action-button action-button-secondary" type="button">
+              Back
+            </button>
+            <button id="nextButton" class="action-button" type="button">
+              Continue
+            </button>
+          </div>
+        </div>
+
+        <div id="resultsPanel" class="panel results-panel" hidden>
+          <div class="results-header">
+            <div>
+              <p class="eyebrow">Result</p>
+              <h2 id="outcomeLabel">Steady Motion</h2>
+            </div>
+            <div class="score-badge">
+              <span class="score-title">Point Score</span>
+              <strong id="scoreValue">50</strong>
+              <span>/ 100</span>
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <img
+              id="stateImage"
+              src="images/balanced-progress.svg"
+              alt="Balanced progress illustration"
+            />
+            <div class="emoji-badge" id="stateEmoji" aria-hidden="true">⚖️</div>
+          </div>
+
+          <div class="summary-card">
+            <h3 id="resultCardTitle">Live Preview</h3>
+            <p id="goalText" class="goal-text">Goal: waiting for the selected mock goal.</p>
+            <p id="summaryText">
+              The final result is currently calculated from the point model. Later this same input shape can be sent to an AI API.
+            </p>
+          </div>
+
+          <div class="highlights">
+            <div class="highlight-box">
+              <span class="highlight-label">Encouragement</span>
+              <p id="encouragementText">A useful roadmap starts with a concrete goal.</p>
+            </div>
+            <div class="highlight-box">
+              <span class="highlight-label">Best Supports</span>
+              <p id="strengthText">Your strongest supports will appear after the first step.</p>
+            </div>
+            <div class="highlight-box full-width">
+              <span class="highlight-label">Main Friction</span>
+              <p id="dragText">Potential friction will be reviewed after the support step.</p>
+            </div>
+            <div class="highlight-box full-width">
+              <span class="highlight-label">Action Items</span>
+              <ul id="actionItems" class="result-list">
+                <li>Name the goal you want to move forward.</li>
+              </ul>
+            </div>
+            <div class="highlight-box full-width">
+              <span class="highlight-label">High-Level Roadmap</span>
+              <ol id="roadmapItems" class="result-list">
+                <li>Start with clarity.</li>
+                <li>Build a manageable routine.</li>
+                <li>Expand once it feels sustainable.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="errorModal" class="modal-backdrop" hidden>
+      <div
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="errorModalTitle"
+        aria-describedby="errorModalMessage"
+      >
+        <p class="eyebrow">Request Failed</p>
+        <h2 id="errorModalTitle">Something blocked this step</h2>
+        <p id="errorModalMessage" class="panel-text">
+          The request did not complete. You can stay on this step and try again.
+        </p>
+        <p id="errorModalDetails" class="modal-details"></p>
+        <div class="modal-actions">
+          <button id="errorRetryButton" class="action-button" type="button">Retry</button>
+          <button id="errorCloseButton" class="action-button action-button-secondary" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
