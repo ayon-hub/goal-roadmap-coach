@@ -216,7 +216,15 @@ Timeouts:
    npm test
    ```
 
-4. Open:
+4. Run quality checks:
+
+   ```bash
+   npm run lint
+   npm run format:check
+   npm run coverage
+   ```
+
+5. Open:
 
    ```text
    http://localhost:3000
@@ -228,6 +236,7 @@ Timeouts:
 - change the application or domain code in `src/`
 - verify the HTTP contract still passes
 - manually verify the browser flow for any UI changes
+- run `npm run lint` and `npm run format:check` before committing
 
 ## Important notes
 

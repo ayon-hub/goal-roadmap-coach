@@ -1,7 +1,9 @@
 const { extractJsonObject, requestPrompt } = require("./ollamaClient");
 
 function getTimeoutMs() {
-  const value = Number(process.env.OLLAMA_SUGGESTION_TIMEOUT_MS || process.env.OLLAMA_TIMEOUT_MS || 120000);
+  const value = Number(
+    process.env.OLLAMA_SUGGESTION_TIMEOUT_MS || process.env.OLLAMA_TIMEOUT_MS || 120000
+  );
   return Number.isFinite(value) && value > 0 ? value : 120000;
 }
 
@@ -11,15 +13,14 @@ function buildPrompt(input) {
     return {
       prompt: question.prompt,
       answer: input.answers[question.key] || question.initial,
-      note: input.answerNotes && input.answerNotes[question.key] ? input.answerNotes[question.key] : ""
+      note:
+        input.answerNotes && input.answerNotes[question.key] ? input.answerNotes[question.key] : ""
     };
   });
-  const resourceBlueprint = input.baseProfile.positiveFactors
-    .filter(Boolean)
-    .map((resource) => ({
-      key: resource.key,
-      value: resource.value
-    }));
+  const resourceBlueprint = input.baseProfile.positiveFactors.filter(Boolean).map((resource) => ({
+    key: resource.key,
+    value: resource.value
+  }));
 
   return [
     "Return only JSON.",
@@ -49,14 +50,14 @@ function extractBalancedArrayAt(text, startIndex) {
         escaping = false;
       } else if (character === "\\") {
         escaping = true;
-      } else if (character === "\"") {
+      } else if (character === '"') {
         inString = false;
       }
 
       continue;
     }
 
-    if (character === "\"") {
+    if (character === '"') {
       inString = true;
       continue;
     }
@@ -91,11 +92,19 @@ function repairSuggestionResponse(text) {
     return parsed;
   }
 
-  if (parsed && parsed.profile && (Array.isArray(parsed.profile.positiveFactors) || Array.isArray(parsed.profile.resources))) {
+  if (
+    parsed &&
+    parsed.profile &&
+    (Array.isArray(parsed.profile.positiveFactors) || Array.isArray(parsed.profile.resources))
+  ) {
     return parsed.profile;
   }
 
-  if (parsed && parsed.data && (Array.isArray(parsed.data.positiveFactors) || Array.isArray(parsed.data.resources))) {
+  if (
+    parsed &&
+    parsed.data &&
+    (Array.isArray(parsed.data.positiveFactors) || Array.isArray(parsed.data.resources))
+  ) {
     return parsed.data;
   }
 
@@ -111,7 +120,9 @@ function repairSuggestionResponse(text) {
 
   const source = String(text || "");
   const repaired = {};
-  const fieldMap = [{ pattern: /"(positiveFactors|resources)"\s*:\s*\[/g, target: "positiveFactors" }];
+  const fieldMap = [
+    { pattern: /"(positiveFactors|resources)"\s*:\s*\[/g, target: "positiveFactors" }
+  ];
 
   fieldMap.forEach((field) => {
     const merged = [];
@@ -136,7 +147,7 @@ function repairSuggestionResponse(text) {
       match = field.pattern.exec(source);
     }
 
-  if (merged.length > 0) {
+    if (merged.length > 0) {
       repaired[field.target] = merged;
     }
   });
@@ -203,7 +214,11 @@ function createOllamaSuggestionProvider() {
       );
 
       const repairedProfile = repairSuggestionResponse(response.text);
-      console.log(`[suggestion-provider] repaired response shape: ${summarizeSuggestionProfile(repairedProfile)}`);
+      console.log(
+        `[suggestion-provider] repaired response shape: ${summarizeSuggestionProfile(
+          repairedProfile
+        )}`
+      );
 
       return {
         profile: repairedProfile,

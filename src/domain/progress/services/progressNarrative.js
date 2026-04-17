@@ -12,7 +12,9 @@ function buildActionItems(goalText, topStrengths, activeConstraints) {
   const secondaryStrength = topStrengths[1];
   const primaryConstraint = activeConstraints[0];
 
-  items.push(`Define one visible win for ${goalText} that you could complete within the next 7 days.`);
+  items.push(
+    `Define one visible win for ${goalText} that you could complete within the next 7 days.`
+  );
   items.push(
     primaryStrength
       ? `Use ${primaryStrength.label.toLowerCase()} as the anchor for your next move by scheduling one repeatable session for it.`
@@ -28,7 +30,9 @@ function buildActionItems(goalText, topStrengths, activeConstraints) {
   }
 
   if (secondaryStrength) {
-    items.push(`Pair ${secondaryStrength.label.toLowerCase()} with the first action so your plan feels easier to sustain.`);
+    items.push(
+      `Pair ${secondaryStrength.label.toLowerCase()} with the first action so your plan feels easier to sustain.`
+    );
   }
 
   return items.slice(0, 3);
@@ -47,11 +51,7 @@ function buildRoadmap(goalText, score, topStrengths, activeConstraints) {
       ? `Expand carefully once the current rhythm feels repeatable, and raise the difficulty only one notch at a time.`
       : `Once the basics feel stable, add a slightly more ambitious milestone without changing everything at once.`;
 
-  return [
-    `Start: ${foundation}`,
-    `Build: ${buildPhase}`,
-    `Finish: ${stretchPhase}`
-  ];
+  return [`Start: ${foundation}`, `Build: ${buildPhase}`, `Finish: ${stretchPhase}`];
 }
 
 function describeState(profile, score, goal) {
@@ -85,7 +85,9 @@ function describeState(profile, score, goal) {
   return {
     summary,
     encouragement,
-    strengths: `${topStrengths.map((factor) => factor.label).join(" and ")} are the strongest resources you can build this plan around.`,
+    strengths: `${topStrengths
+      .map((factor) => factor.label)
+      .join(" and ")} are the strongest resources you can build this plan around.`,
     friction:
       activeConstraints.length > 0
         ? `${activeConstraints

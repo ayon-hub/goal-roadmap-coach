@@ -1,7 +1,9 @@
 const { extractJsonObject, requestPrompt } = require("./ollamaClient");
 
 function getTimeoutMs() {
-  const value = Number(process.env.OLLAMA_PLANNING_TIMEOUT_MS || process.env.OLLAMA_TIMEOUT_MS || 90000);
+  const value = Number(
+    process.env.OLLAMA_PLANNING_TIMEOUT_MS || process.env.OLLAMA_TIMEOUT_MS || 90000
+  );
   return Number.isFinite(value) && value > 0 ? value : 90000;
 }
 
@@ -23,7 +25,7 @@ function buildPrompt(goalText, baseGoal) {
     "Return only JSON.",
     `Create ${questionCount} wise questions for this goal.`,
     "Focus on: intent, readiness, willingness, and origin of the goal.",
-    "Return exactly this shape: {\"questions\":[{\"key\":\"string\",\"prompt\":\"string\",\"initial\":\"string\",\"options\":[{\"value\":\"string\",\"label\":\"string\"}]}]}",
+    'Return exactly this shape: {"questions":[{"key":"string","prompt":"string","initial":"string","options":[{"value":"string","label":"string"}]}]}',
     "Keep question keys and option values exactly as provided.",
     `Goal: ${goalText}`,
     `Question blueprint: ${JSON.stringify(questionBlueprint)}`,
@@ -45,14 +47,14 @@ function extractBalancedArrayAt(text, startIndex) {
         escaping = false;
       } else if (character === "\\") {
         escaping = true;
-      } else if (character === "\"") {
+      } else if (character === '"') {
         inString = false;
       }
 
       continue;
     }
 
-    if (character === "\"") {
+    if (character === '"') {
       inString = true;
       continue;
     }

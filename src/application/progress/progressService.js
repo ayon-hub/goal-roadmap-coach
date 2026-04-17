@@ -5,11 +5,18 @@ const {
   getDefaultGoalKey
 } = require("../../domain/progress/catalogs/defaults");
 const { createProgressProfile } = require("../../domain/progress/entities/progressProfile");
-const { calculateScore, sanitizeProfile } = require("../../domain/progress/services/progressCalculator");
+const {
+  calculateScore,
+  sanitizeProfile
+} = require("../../domain/progress/services/progressCalculator");
 const { pickOutcome } = require("../../domain/progress/services/progressNarrative");
 const { buildProfileFromAnswers } = require("../../domain/progress/services/starterProfileFactory");
 const { generateResultDescription } = require("./resultProviderService");
-const { checkPlanningProvider, loadGoalPlan, resolveGoalKeyFromText } = require("./planningProviderService");
+const {
+  checkPlanningProvider,
+  loadGoalPlan,
+  resolveGoalKeyFromText
+} = require("./planningProviderService");
 const { suggestProfile } = require("./suggestionProviderService");
 
 function toClientGoal(goal) {
@@ -98,20 +105,22 @@ async function getInitialQuestionnaire() {
 }
 
 async function buildSuggestedProfile(input) {
-  const goal = input && input.goal
-    ? input.goal
-    : await loadGoalPlan(
-      input && input.goalKey ? input.goalKey : getDefaultGoalKey(),
-      input && input.goalText ? input.goalText : "",
-      input && input.providerContext ? input.providerContext : null
-    );
+  const goal =
+    input && input.goal
+      ? input.goal
+      : await loadGoalPlan(
+          input && input.goalKey ? input.goalKey : getDefaultGoalKey(),
+          input && input.goalText ? input.goalText : "",
+          input && input.providerContext ? input.providerContext : null
+        );
   const baseProfile = buildProfileFromAnswers(goal, input && input.answers ? input.answers : {});
   const suggestion = await suggestProfile({
     goal,
     goalText: input && input.goalText ? input.goalText : goal.label,
     answers: input && input.answers ? input.answers : {},
     answerNotes: input && input.answerNotes ? input.answerNotes : {},
-    providerContext: input && input.providerContext ? input.providerContext : goal.providerContext || null,
+    providerContext:
+      input && input.providerContext ? input.providerContext : goal.providerContext || null,
     baseProfile
   });
 

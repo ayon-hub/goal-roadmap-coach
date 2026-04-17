@@ -44,10 +44,12 @@ function calculateScore(profile) {
     safeProfile.positiveFactors.filter((factor) => factor.value >= 7).length * 2;
   const obstacleAverage =
     activeConstraints.length > 0
-      ? activeConstraints.reduce((total, constraint) => total + constraint.value, 0) / activeConstraints.length
+      ? activeConstraints.reduce((total, constraint) => total + constraint.value, 0) /
+        activeConstraints.length
       : 0;
   const obstacleLoadPenalty = activeConstraints.length * 3;
-  const score = resourceAverage * 8 + resourceStrengthBonus - obstacleAverage * 5 - obstacleLoadPenalty + 18;
+  const score =
+    resourceAverage * 8 + resourceStrengthBonus - obstacleAverage * 5 - obstacleLoadPenalty + 18;
 
   return clampScore(score);
 }

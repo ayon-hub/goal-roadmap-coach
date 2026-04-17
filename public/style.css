@@ -71,8 +71,7 @@ body {
   min-height: 100vh;
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   color: var(--text);
-  background:
-    radial-gradient(circle at top left, var(--bg-glow), transparent 32%),
+  background: radial-gradient(circle at top left, var(--bg-glow), transparent 32%),
     linear-gradient(135deg, var(--bg-highlight) 0%, var(--bg) 50%, var(--bg-accent) 100%);
   transition: background 180ms ease, color 180ms ease;
 }

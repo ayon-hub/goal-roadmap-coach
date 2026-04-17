@@ -1,7 +1,9 @@
 const { extractJsonObject, requestPrompt } = require("./ollamaClient");
 
 function getTimeoutMs() {
-  const value = Number(process.env.OLLAMA_RESULT_TIMEOUT_MS || process.env.OLLAMA_TIMEOUT_MS || 75000);
+  const value = Number(
+    process.env.OLLAMA_RESULT_TIMEOUT_MS || process.env.OLLAMA_TIMEOUT_MS || 75000
+  );
   return Number.isFinite(value) && value > 0 ? value : 75000;
 }
 
@@ -11,22 +13,20 @@ function buildPrompt(input) {
     answer: entry.answer,
     note: entry.note || ""
   }));
-  const topResources = input.profile.positiveFactors
-    .map((resource) => {
-      return {
-        label: resource.label,
-        value: resource.value,
-        note: resource.note || ""
-      };
-    });
-  const obstacles = input.profile.constraints
-    .map((constraint) => ({
-      label: constraint.label,
-      active: Boolean(constraint.active),
-      value: constraint.value,
-      description: constraint.description || "",
-      note: constraint.note || ""
-    }));
+  const topResources = input.profile.positiveFactors.map((resource) => {
+    return {
+      label: resource.label,
+      value: resource.value,
+      note: resource.note || ""
+    };
+  });
+  const obstacles = input.profile.constraints.map((constraint) => ({
+    label: constraint.label,
+    active: Boolean(constraint.active),
+    value: constraint.value,
+    description: constraint.description || "",
+    note: constraint.note || ""
+  }));
 
   return [
     "Return only JSON with this exact shape:",
@@ -138,7 +138,9 @@ function repairResultResponse(text) {
     }
 
     console.warn(
-      `[result-provider] Repaired partial Ollama JSON with fields: ${Object.keys(repaired).join(", ")}`
+      `[result-provider] Repaired partial Ollama JSON with fields: ${Object.keys(repaired).join(
+        ", "
+      )}`
     );
 
     return repaired;

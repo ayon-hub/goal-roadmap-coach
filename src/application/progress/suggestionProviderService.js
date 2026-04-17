@@ -1,4 +1,6 @@
-const { createOllamaSuggestionProvider } = require("../../infrastructure/ai/ollamaSuggestionProvider");
+const {
+  createOllamaSuggestionProvider
+} = require("../../infrastructure/ai/ollamaSuggestionProvider");
 const { createProviderFailure } = require("./providerFailure");
 
 function clone(value) {
@@ -23,26 +25,31 @@ function normalizeNumericValue(value, fallback) {
 }
 
 function normalizeResource(raw, fallback) {
-  const normalizedKey = raw && raw.key
-    ? String(raw.key)
-    : fallback && fallback.key
-      ? String(fallback.key)
-      : "";
+  const normalizedKey =
+    raw && raw.key ? String(raw.key) : fallback && fallback.key ? String(fallback.key) : "";
   return {
     key: normalizedKey,
-    label: raw && raw.label
-      ? String(raw.label)
-      : fallback && fallback.label
+    label:
+      raw && raw.label
+        ? String(raw.label)
+        : fallback && fallback.label
         ? fallback.label
         : humanizeKey(normalizedKey),
-    description: raw && raw.description
-      ? String(raw.description)
-      : fallback && fallback.description
+    description:
+      raw && raw.description
+        ? String(raw.description)
+        : fallback && fallback.description
         ? fallback.description
         : "",
-    value: raw && raw.value !== undefined && raw.value !== null
-      ? normalizeNumericValue(raw.value, fallback && fallback.value !== undefined && fallback.value !== null ? normalizeNumericValue(fallback.value, 4) : 4)
-      : fallback && fallback.value !== undefined && fallback.value !== null
+    value:
+      raw && raw.value !== undefined && raw.value !== null
+        ? normalizeNumericValue(
+            raw.value,
+            fallback && fallback.value !== undefined && fallback.value !== null
+              ? normalizeNumericValue(fallback.value, 4)
+              : 4
+          )
+        : fallback && fallback.value !== undefined && fallback.value !== null
         ? normalizeNumericValue(fallback.value, 4)
         : 4,
     note: fallback && fallback.note ? fallback.note : ""
@@ -52,20 +59,28 @@ function normalizeResource(raw, fallback) {
 function normalizeObstacle(raw, fallback) {
   return {
     key: fallback && fallback.key ? fallback.key : raw && raw.key ? String(raw.key) : "",
-    label: raw && raw.label
-      ? String(raw.label)
-      : fallback && fallback.label
+    label:
+      raw && raw.label
+        ? String(raw.label)
+        : fallback && fallback.label
         ? fallback.label
         : humanizeKey(fallback && fallback.key ? fallback.key : raw && raw.key ? raw.key : ""),
-    description: raw && raw.description
-      ? String(raw.description)
-      : fallback && fallback.description
+    description:
+      raw && raw.description
+        ? String(raw.description)
+        : fallback && fallback.description
         ? fallback.description
         : "",
     active: Boolean(raw && raw.active),
-    value: raw && raw.value !== undefined && raw.value !== null
-      ? normalizeNumericValue(raw.value, fallback && fallback.value !== undefined && fallback.value !== null ? normalizeNumericValue(fallback.value, 0) : 0)
-      : fallback && fallback.value !== undefined && fallback.value !== null
+    value:
+      raw && raw.value !== undefined && raw.value !== null
+        ? normalizeNumericValue(
+            raw.value,
+            fallback && fallback.value !== undefined && fallback.value !== null
+              ? normalizeNumericValue(fallback.value, 0)
+              : 0
+          )
+        : fallback && fallback.value !== undefined && fallback.value !== null
         ? normalizeNumericValue(fallback.value, 0)
         : 0,
     note: fallback && fallback.note ? fallback.note : ""
@@ -77,8 +92,12 @@ function extractResourceMap(rawProfile, fallbackProfile) {
     return null;
   }
 
-  const fallbackKeys = fallbackProfile.positiveFactors.filter(isUsableEntry).map((resource) => resource.key);
-  const matchedKeys = fallbackKeys.filter((key) => Object.prototype.hasOwnProperty.call(rawProfile, key));
+  const fallbackKeys = fallbackProfile.positiveFactors
+    .filter(isUsableEntry)
+    .map((resource) => resource.key);
+  const matchedKeys = fallbackKeys.filter((key) =>
+    Object.prototype.hasOwnProperty.call(rawProfile, key)
+  );
 
   if (matchedKeys.length === 0) {
     return null;
@@ -139,12 +158,18 @@ function explainProfileFailure(rawProfile, fallbackProfile) {
     return `provider returned ${typeof rawProfile} instead of an object or resource array`;
   }
 
-  const fallbackKeys = fallbackProfile.positiveFactors.filter(isUsableEntry).map((resource) => resource.key);
+  const fallbackKeys = fallbackProfile.positiveFactors
+    .filter(isUsableEntry)
+    .map((resource) => resource.key);
   const availableKeys = Object.keys(rawProfile);
-  const matchingKeys = fallbackKeys.filter((key) => Object.prototype.hasOwnProperty.call(rawProfile, key));
+  const matchingKeys = fallbackKeys.filter((key) =>
+    Object.prototype.hasOwnProperty.call(rawProfile, key)
+  );
 
   if (matchingKeys.length > 0) {
-    return `provider returned a compact resource value map with keys ${matchingKeys.join(", ")}, but it could not be normalized`;
+    return `provider returned a compact resource value map with keys ${matchingKeys.join(
+      ", "
+    )}, but it could not be normalized`;
   }
 
   if (rawProfile.profile || rawProfile.data) {
@@ -155,7 +180,9 @@ function explainProfileFailure(rawProfile, fallbackProfile) {
     return "provider returned a resource array, but none of the entries were usable objects";
   }
 
-  return `provider returned object keys [${availableKeys.join(", ")}], but expected resources/positiveFactors or resource value keys [${fallbackKeys.join(", ")}]`;
+  return `provider returned object keys [${availableKeys.join(
+    ", "
+  )}], but expected resources/positiveFactors or resource value keys [${fallbackKeys.join(", ")}]`;
 }
 
 function normalizeProfile(rawProfile, fallbackProfile) {
@@ -175,7 +202,10 @@ function normalizeProfile(rawProfile, fallbackProfile) {
   }
 
   const dynamicResources = usableResources.map((resource, index) => {
-    const fallbackResource = fallbackResources.find((entry) => entry.key === resource.key) || fallbackResources[index] || null;
+    const fallbackResource =
+      fallbackResources.find((entry) => entry.key === resource.key) ||
+      fallbackResources[index] ||
+      null;
     return normalizeResource(resource, fallbackResource);
   });
 
@@ -220,8 +250,8 @@ async function suggestProfile(input) {
     const rawSummary = Array.isArray(rawProfile)
       ? `array(${rawProfile.length})`
       : rawProfile && typeof rawProfile === "object"
-        ? `object keys=[${Object.keys(rawProfile).join(", ")}]`
-        : String(rawProfile);
+      ? `object keys=[${Object.keys(rawProfile).join(", ")}]`
+      : String(rawProfile);
     console.log(`[suggestion-provider] provider payload shape: ${rawSummary}`);
     const droppedFallbackResources = Array.isArray(fallback.positiveFactors)
       ? fallback.positiveFactors.length - fallback.positiveFactors.filter(isUsableEntry).length
@@ -238,23 +268,34 @@ async function suggestProfile(input) {
 
     const normalized = normalizeProfile(rawProfile, fallback);
     console.log(
-      `[suggestion-provider] normalized resources=${normalized && normalized.positiveFactors ? normalized.positiveFactors.length : 0}, constraints=${normalized && normalized.constraints ? normalized.constraints.length : 0}`
+      `[suggestion-provider] normalized resources=${
+        normalized && normalized.positiveFactors ? normalized.positiveFactors.length : 0
+      }, constraints=${normalized && normalized.constraints ? normalized.constraints.length : 0}`
     );
 
     if (!normalized) {
-      throw new Error(`Suggested profile did not match the required schema: ${explainProfileFailure(rawProfile, fallback)}`);
+      throw new Error(
+        `Suggested profile did not match the required schema: ${explainProfileFailure(
+          rawProfile,
+          fallback
+        )}`
+      );
     }
 
     normalized.provider = provider.name;
     normalized.providerError = null;
     return {
       profile: normalized,
-      providerContext: result && Object.prototype.hasOwnProperty.call(result, "providerContext")
-        ? result.providerContext
-        : null
+      providerContext:
+        result && Object.prototype.hasOwnProperty.call(result, "providerContext")
+          ? result.providerContext
+          : null
     };
   } catch (error) {
-    console.error("[suggestion-provider] request failed:", error && error.message ? error.message : error);
+    console.error(
+      "[suggestion-provider] request failed:",
+      error && error.message ? error.message : error
+    );
     if (error && error.stack) {
       console.error("[suggestion-provider] stack:");
       console.error(error.stack);

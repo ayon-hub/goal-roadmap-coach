@@ -62,7 +62,7 @@ module.exports = [
         response.writeHead(200, {
           "Content-Type": "application/json"
         });
-        response.end(JSON.stringify({ response: "{\"ok\":true}" }));
+        response.end(JSON.stringify({ response: '{"ok":true}' }));
       });
 
       try {
@@ -79,7 +79,7 @@ module.exports = [
           1000
         );
 
-        assert.strictEqual(result.text, "{\"ok\":true}");
+        assert.strictEqual(result.text, '{"ok":true}');
         assert.strictEqual(result.context, null);
         assert.strictEqual(capturedPath, "/api/generate");
         assert.strictEqual(capturedBody.prompt, "hello");

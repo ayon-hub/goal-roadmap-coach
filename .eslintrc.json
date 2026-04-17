@@ -1,0 +1,43 @@
+{
+  "root": true,
+  "env": {
+    "es6": true
+  },
+  "extends": ["eslint:recommended"],
+  "ignorePatterns": ["node_modules/", "coverage/", "public/images/"],
+  "overrides": [
+    {
+      "files": [
+        "server.js",
+        "src/**/*.js",
+        "test/**/*.js",
+        "scripts/**/*.js",
+        "commitlint.config.js"
+      ],
+      "env": {
+        "node": true,
+        "commonjs": true
+      },
+      "parserOptions": {
+        "ecmaVersion": 2020
+      },
+      "rules": {
+        "no-console": "off"
+      }
+    },
+    {
+      "files": ["public/**/*.js"],
+      "env": {
+        "browser": true,
+        "es6": true
+      },
+      "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "script"
+      },
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
+}

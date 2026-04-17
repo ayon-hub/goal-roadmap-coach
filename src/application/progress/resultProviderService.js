@@ -73,7 +73,10 @@ async function generateResultDescription(input) {
     const description = result && result.description ? result.description : result || {};
     return normalizeDescription(description, fallback, provider.name, null);
   } catch (error) {
-    console.error("[result-provider] request failed:", error && error.message ? error.message : error);
+    console.error(
+      "[result-provider] request failed:",
+      error && error.message ? error.message : error
+    );
     if (error && error.stack) {
       console.error(error.stack);
     }

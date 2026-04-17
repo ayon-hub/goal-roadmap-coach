@@ -52,8 +52,10 @@ function buildProfileFromAnswers(goalPlan, answers) {
   });
 
   goal.questions.forEach((question) => {
-    const selectedValue = answers && answers[question.key] ? answers[question.key] : question.initial;
-    const option = question.options.find((entry) => entry.value === selectedValue) || question.options[0];
+    const selectedValue =
+      answers && answers[question.key] ? answers[question.key] : question.initial;
+    const option =
+      question.options.find((entry) => entry.value === selectedValue) || question.options[0];
 
     if (!option) {
       return;

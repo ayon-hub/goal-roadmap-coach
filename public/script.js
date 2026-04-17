@@ -154,7 +154,8 @@ function describeStepFailure(step) {
     return {
       title: "Could not suggest resources",
       message: "The app could not generate resources and obstacles from your answers.",
-      details: "Your current answers are still here. Retry this step after the provider is available."
+      details:
+        "Your current answers are still here. Retry this step after the provider is available."
     };
   }
 
@@ -162,7 +163,8 @@ function describeStepFailure(step) {
     return {
       title: "Could not generate the final result",
       message: "The final result request failed before a response could be shown.",
-      details: "Your goal, answers, resources, and obstacles are unchanged. Retry when the provider is ready."
+      details:
+        "Your goal, answers, resources, and obstacles are unchanged. Retry when the provider is ready."
     };
   }
 
@@ -249,13 +251,15 @@ function resetResultPreview() {
     listItem.textContent = item;
     actionItems.appendChild(listItem);
   });
-  ["Start with clarity.", "Build a manageable routine.", "Expand once it feels sustainable."].forEach(
-    (item) => {
-      const listItem = document.createElement("li");
-      listItem.textContent = item;
-      roadmapItems.appendChild(listItem);
-    }
-  );
+  [
+    "Start with clarity.",
+    "Build a manageable routine.",
+    "Expand once it feels sustainable."
+  ].forEach((item) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = item;
+    roadmapItems.appendChild(listItem);
+  });
   resultCardTitle.textContent = "Final Result";
 }
 
@@ -288,17 +292,19 @@ function renderGoalStep() {
   const prompt = document.createElement("label");
   prompt.className = "question-prompt";
   prompt.setAttribute("for", "goalInput");
-  prompt.textContent = state.goalPrompt && state.goalPrompt.label
-    ? state.goalPrompt.label
-    : "Write the goal you want help with";
+  prompt.textContent =
+    state.goalPrompt && state.goalPrompt.label
+      ? state.goalPrompt.label
+      : "Write the goal you want help with";
 
   const input = document.createElement("textarea");
   input.id = "goalInput";
   input.className = "goal-input";
   input.rows = 4;
-  input.placeholder = state.goalPrompt && state.goalPrompt.placeholder
-    ? state.goalPrompt.placeholder
-    : "Example: Build a steady exercise habit, finish my portfolio, improve my finances, or regain daily focus.";
+  input.placeholder =
+    state.goalPrompt && state.goalPrompt.placeholder
+      ? state.goalPrompt.placeholder
+      : "Example: Build a steady exercise habit, finish my portfolio, improve my finances, or regain daily focus.";
   input.value = state.goalText;
   input.addEventListener("input", (event) => {
     state.goalText = event.target.value;
@@ -356,9 +362,7 @@ function renderQuestionnaire() {
     const providerLine = document.createElement("p");
     providerLine.className = "item-description";
     providerLine.textContent =
-      selectedGoal.provider === "ollama"
-        ? "Planning provider: Ollama"
-        : "Planning provider: Mock";
+      selectedGoal.provider === "ollama" ? "Planning provider: Ollama" : "Planning provider: Mock";
     introCard.appendChild(providerLine);
   }
 
@@ -485,51 +489,53 @@ function renderResources() {
 function renderObstacleOptions() {
   constraintOptions.textContent = "";
 
-  state.profile.constraints.filter((constraint) => !constraint.custom).forEach((constraint) => {
-    const label = document.createElement("label");
-    label.className = "constraint-card";
+  state.profile.constraints
+    .filter((constraint) => !constraint.custom)
+    .forEach((constraint) => {
+      const label = document.createElement("label");
+      label.className = "constraint-card";
 
-    const header = document.createElement("div");
-    header.className = "constraint-card-header";
+      const header = document.createElement("div");
+      header.className = "constraint-card-header";
 
-    const input = document.createElement("input");
-    input.type = "checkbox";
-    input.checked = constraint.active;
-    input.addEventListener("change", (event) => {
-      constraint.active = event.target.checked;
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.checked = constraint.active;
+      input.addEventListener("change", (event) => {
+        constraint.active = event.target.checked;
 
-      if (constraint.active && constraint.value === 0) {
-        constraint.value = 4;
-      }
+        if (constraint.active && constraint.value === 0) {
+          constraint.value = 4;
+        }
 
-      if (!constraint.active) {
-        constraint.value = 0;
-      }
+        if (!constraint.active) {
+          constraint.value = 0;
+        }
 
-      renderObstacleSliders();
+        renderObstacleSliders();
+      });
+
+      const title = document.createElement("strong");
+      title.textContent = constraint.label;
+
+      header.append(input, title);
+
+      const description = document.createElement("p");
+      description.className = "item-description";
+      description.textContent = constraint.description || "";
+
+      const note = document.createElement("textarea");
+      note.className = "resource-note";
+      note.rows = 2;
+      note.placeholder = "Optional detail: describe how this obstacle affects you";
+      note.value = constraint.note || "";
+      note.addEventListener("input", (event) => {
+        constraint.note = event.target.value;
+      });
+
+      label.append(header, description, note);
+      constraintOptions.appendChild(label);
     });
-
-    const title = document.createElement("strong");
-    title.textContent = constraint.label;
-
-    header.append(input, title);
-
-    const description = document.createElement("p");
-    description.className = "item-description";
-    description.textContent = constraint.description || "";
-
-    const note = document.createElement("textarea");
-    note.className = "resource-note";
-    note.rows = 2;
-    note.placeholder = "Optional detail: describe how this obstacle affects you";
-    note.value = constraint.note || "";
-    note.addEventListener("input", (event) => {
-      constraint.note = event.target.value;
-    });
-
-    label.append(header, description, note);
-    constraintOptions.appendChild(label);
-  });
 }
 
 function renderCustomObstacleInputs() {
@@ -558,7 +564,9 @@ function renderCustomObstacleInputs() {
     removeButton.className = "action-button action-button-secondary";
     removeButton.textContent = "Remove";
     removeButton.addEventListener("click", () => {
-      state.profile.constraints = state.profile.constraints.filter((entry) => entry.key !== constraint.key);
+      state.profile.constraints = state.profile.constraints.filter(
+        (entry) => entry.key !== constraint.key
+      );
       renderCustomObstacleInputs();
       renderObstacleSliders();
     });
@@ -655,10 +663,13 @@ function renderAnswerSummary() {
   appendAccordionSection(
     "Answers",
     selectedGoal.questions.map((question) => {
-      const option = question.options.find((entry) => entry.value === state.starterAnswers[question.key]);
-      const note = state.answerNotes[question.key] && state.answerNotes[question.key].trim()
-        ? ` | Detail: ${state.answerNotes[question.key].trim()}`
-        : "";
+      const option = question.options.find(
+        (entry) => entry.value === state.starterAnswers[question.key]
+      );
+      const note =
+        state.answerNotes[question.key] && state.answerNotes[question.key].trim()
+          ? ` | Detail: ${state.answerNotes[question.key].trim()}`
+          : "";
       return `${question.prompt}: ${option ? option.label : ""}${note}`;
     })
   );
@@ -674,7 +685,9 @@ function renderAnswerSummary() {
     "Obstacles",
     state.profile.constraints.map((constraint) => {
       return constraint.active
-        ? `${constraint.label}: active at ${constraint.value}/10${constraint.note && constraint.note.trim() ? ` | Note: ${constraint.note.trim()}` : ""}`
+        ? `${constraint.label}: active at ${constraint.value}/10${
+            constraint.note && constraint.note.trim() ? ` | Note: ${constraint.note.trim()}` : ""
+          }`
         : `${constraint.label}: not active`;
     })
   );
@@ -721,8 +734,8 @@ function renderNavigation() {
   nextButton.textContent = state.isLoading
     ? "Please wait..."
     : currentIndex === STEP_ORDER.length - 1
-      ? "Review Again"
-      : "Continue";
+    ? "Review Again"
+    : "Continue";
 }
 
 function getLoadingMessage() {
@@ -760,7 +773,8 @@ function renderStepMeta() {
   const meta = STEP_META[state.currentStep];
   stepTitle.textContent = meta.title;
   stepDescription.textContent = meta.description;
-  resultCardTitle.textContent = state.currentStep === "result" ? resultCardTitle.textContent : "Final Result";
+  resultCardTitle.textContent =
+    state.currentStep === "result" ? resultCardTitle.textContent : "Final Result";
 }
 
 function renderCurrentStep() {
@@ -800,7 +814,9 @@ function applyEvaluation(evaluation) {
   state.evaluation = evaluation;
   scoreValue.textContent = evaluation.score;
   outcomeLabel.textContent = evaluation.outcome.label;
-  goalText.textContent = `Goal: ${state.goalText.trim() || (selectedGoal ? selectedGoal.label : evaluation.description.goal)}`;
+  goalText.textContent = `Goal: ${
+    state.goalText.trim() || (selectedGoal ? selectedGoal.label : evaluation.description.goal)
+  }`;
   summaryText.textContent = evaluation.description.summary;
   encouragementText.textContent = evaluation.description.encouragement;
   strengthText.textContent = evaluation.description.strengths;
@@ -842,7 +858,9 @@ async function updateResult() {
       profile: state.profile,
       providerContext: state.providerContext,
       questionResponses: selectedGoal.questions.map((question) => {
-        const option = question.options.find((entry) => entry.value === state.starterAnswers[question.key]);
+        const option = question.options.find(
+          (entry) => entry.value === state.starterAnswers[question.key]
+        );
         return {
           key: question.key,
           prompt: question.prompt,
@@ -1035,14 +1053,20 @@ initializePage().catch((error) => {
   openErrorModal(
     "Could not load the app",
     error && error.message ? error.message : "The page could not load its initial configuration.",
-    error && error.details ? error.details : "Check the server or provider configuration, then retry.",
+    error && error.details
+      ? error.details
+      : "Check the server or provider configuration, then retry.",
     () => {
       closeErrorModal();
       initializePage().catch((nextError) => {
         openErrorModal(
           "Could not load the app",
-          nextError && nextError.message ? nextError.message : "The page could not load its initial configuration.",
-          nextError && nextError.details ? nextError.details : "Check the server or provider configuration, then retry.",
+          nextError && nextError.message
+            ? nextError.message
+            : "The page could not load its initial configuration.",
+          nextError && nextError.details
+            ? nextError.details
+            : "Check the server or provider configuration, then retry.",
           retryAction
         );
       });

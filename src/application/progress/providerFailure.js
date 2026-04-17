@@ -14,7 +14,9 @@ function createProviderFailure(stage, providerName, error) {
   const providerLabel = providerName === "ollama" ? "Ollama" : "AI provider";
   const details = toErrorMessage(error);
   const failure = new Error(
-    `${providerLabel} could not complete the ${stage || "request"}. Check that the service is running and try again.`
+    `${providerLabel} could not complete the ${
+      stage || "request"
+    }. Check that the service is running and try again.`
   );
 
   failure.name = "ProviderFailure";

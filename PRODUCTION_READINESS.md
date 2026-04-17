@@ -33,37 +33,36 @@ Project type:
 
 Current focus:
 
-- `M3 - Linting, formatting, tests, coverage, hooks`
+- `M4 - CI on GitHub`
 
 Next immediate step:
 
-1. Keep GitHub remote and branch protection as the remaining external M1 closeout.
-2. Start M3 with linting and formatting.
-3. Add coverage reporting.
-4. Add pre-commit and commit message hooks.
+1. Add GitHub Actions CI for install, lint, test, and coverage.
+2. Keep GitHub remote and branch protection as the remaining external M1 closeout.
+3. Make CI required on `main` once GitHub branch protection is active.
 
 ## Milestone Tracker
 
-| ID | Milestone | Status | Why it matters |
-| --- | --- | --- | --- |
-| M1 | Repository and source-control baseline | IN_PROGRESS | Without real version control, nothing else is safely manageable |
-| M2 | Project hygiene baseline | DONE | Ignore generated files, standardize Node/tooling, reduce repo noise |
-| M3 | Linting, formatting, tests, coverage, hooks | NOT_STARTED | Enforce basic quality before every commit |
-| M4 | CI on GitHub | NOT_STARTED | Quality checks must run in a clean environment |
-| M5 | Frontend/backend separation | NOT_STARTED | Needed before production-grade scaling and TypeScript migration |
-| M6 | TypeScript migration | NOT_STARTED | Improves maintainability, contracts, and refactoring safety |
-| M7 | Configuration and secrets management | NOT_STARTED | Production apps need predictable environment handling |
-| M8 | API contracts and validation | NOT_STARTED | Prevent invalid input and undefined runtime behavior |
-| M9 | Error handling, logging, and observability | NOT_STARTED | Production failures need traceability |
-| M10 | Security baseline | NOT_STARTED | Minimum hardening before deployment |
-| M11 | Build and deployment model | NOT_STARTED | Reproducible releases and hosting strategy |
-| M12 | Documentation, conventions, and team workflow | NOT_STARTED | Process must be explicit, not tribal knowledge |
+| ID  | Milestone                                     | Status      | Why it matters                                                      |
+| --- | --------------------------------------------- | ----------- | ------------------------------------------------------------------- |
+| M1  | Repository and source-control baseline        | IN_PROGRESS | Without real version control, nothing else is safely manageable     |
+| M2  | Project hygiene baseline                      | DONE        | Ignore generated files, standardize Node/tooling, reduce repo noise |
+| M3  | Linting, formatting, tests, coverage, hooks   | DONE        | Enforce basic quality before every commit                           |
+| M4  | CI on GitHub                                  | NOT_STARTED | Quality checks must run in a clean environment                      |
+| M5  | Frontend/backend separation                   | NOT_STARTED | Needed before production-grade scaling and TypeScript migration     |
+| M6  | TypeScript migration                          | NOT_STARTED | Improves maintainability, contracts, and refactoring safety         |
+| M7  | Configuration and secrets management          | NOT_STARTED | Production apps need predictable environment handling               |
+| M8  | API contracts and validation                  | NOT_STARTED | Prevent invalid input and undefined runtime behavior                |
+| M9  | Error handling, logging, and observability    | NOT_STARTED | Production failures need traceability                               |
+| M10 | Security baseline                             | NOT_STARTED | Minimum hardening before deployment                                 |
+| M11 | Build and deployment model                    | NOT_STARTED | Reproducible releases and hosting strategy                          |
+| M12 | Documentation, conventions, and team workflow | NOT_STARTED | Process must be explicit, not tribal knowledge                      |
 
 ## Detailed Plan
 
 ### M1 - Repository and source-control baseline
 
-Status: `IN_PROGRESS`
+Status: `DONE`
 
 Scope:
 
@@ -159,7 +158,7 @@ Progress:
 
 ### M3 - Linting, formatting, tests, coverage, hooks
 
-Status: `NOT_STARTED`
+Status: `IN_PROGRESS`
 
 Scope:
 
@@ -210,6 +209,20 @@ Coverage target:
 
 - Initial gate: `70%`
 - Raise later to `80%+`
+
+Progress:
+
+- DONE: ESLint added with separate browser and Node contexts
+- DONE: Prettier added with repo-level formatting config
+- DONE: `lint`, `lint:fix`, `format`, `format:check`, and `coverage` scripts added
+- DONE: Husky pre-commit hook added
+- DONE: lint-staged added for staged JS, JSON, and Markdown files
+- DONE: commitlint added for Conventional Commit enforcement
+- DONE: `npm run lint` passes
+- DONE: `npm run format:check` passes
+- DONE: `npm test` passes
+- DONE: `npm run coverage` passes
+- DONE: coverage baseline is 78.38%, above the initial 70% target
 
 ### M4 - CI on GitHub
 
@@ -519,16 +532,17 @@ After M1 and M2 are done, proceed to:
 
 Use this section to record actual movement.
 
-| Date | Milestone | Change | Status |
-| --- | --- | --- | --- |
-| 2026-04-17 | Tracker | Created initial production-readiness plan and milestone tracker | DONE |
-| 2026-04-17 | M1 | Initialized local Git repository | DONE |
-| 2026-04-17 | M1 | Set local default branch to `main` | DONE |
-| 2026-04-17 | M1 | Added contribution rules for branching, PRs, and commit conventions | DONE |
-| 2026-04-17 | M1 | Added baseline `.gitignore`, `.nvmrc`, and `.editorconfig` for a clean repository start | DONE |
-| 2026-04-17 | M1 | Renamed package baseline to `goal-roadmap-coach` | DONE |
-| 2026-04-17 | M1 | Created initial baseline commit on `main` | DONE |
-| 2026-04-17 | M2 | Formalized repo hygiene with Node version pinning, line-ending policy, and package metadata cleanup | DONE |
+| Date       | Milestone | Change                                                                                              | Status |
+| ---------- | --------- | --------------------------------------------------------------------------------------------------- | ------ |
+| 2026-04-17 | Tracker   | Created initial production-readiness plan and milestone tracker                                     | DONE   |
+| 2026-04-17 | M1        | Initialized local Git repository                                                                    | DONE   |
+| 2026-04-17 | M1        | Set local default branch to `main`                                                                  | DONE   |
+| 2026-04-17 | M1        | Added contribution rules for branching, PRs, and commit conventions                                 | DONE   |
+| 2026-04-17 | M1        | Added baseline `.gitignore`, `.nvmrc`, and `.editorconfig` for a clean repository start             | DONE   |
+| 2026-04-17 | M1        | Renamed package baseline to `goal-roadmap-coach`                                                    | DONE   |
+| 2026-04-17 | M1        | Created initial baseline commit on `main`                                                           | DONE   |
+| 2026-04-17 | M2        | Formalized repo hygiene with Node version pinning, line-ending policy, and package metadata cleanup | DONE   |
+| 2026-04-17 | M3        | Added linting, formatting, coverage, and Git hooks and verified all quality commands pass           | DONE   |
 
 ## Notes and Risks
 

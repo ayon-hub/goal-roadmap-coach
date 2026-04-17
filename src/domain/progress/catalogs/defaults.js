@@ -38,14 +38,16 @@ const outcomeStates = [
 
 const goalPrompt = {
   label: "What goal are you working toward?",
-  placeholder: "Example: Build a steady exercise habit, finish my portfolio, prepare for a new role, improve my finances, or regain daily focus."
+  placeholder:
+    "Example: Build a steady exercise habit, finish my portfolio, prepare for a new role, improve my finances, or regain daily focus."
 };
 
 const goalCatalog = [
   {
     key: "build_exercise_habit",
     label: "Build a steady exercise habit",
-    description: "Create a repeatable weekly fitness routine that feels achievable and sustainable.",
+    description:
+      "Create a repeatable weekly fitness routine that feels achievable and sustainable.",
     questions: [
       {
         key: "schedule_stability",
@@ -204,21 +206,99 @@ const goalCatalog = [
       }
     ],
     resources: [
-      { key: "routine_anchor", label: "Routine Anchor", description: "A reliable time slot or trigger that helps the habit happen.", value: 4, note: "" },
-      { key: "exercise_clarity", label: "Exercise Clarity", description: "Knowing what kind of workout to do when the session starts.", value: 4, note: "" },
-      { key: "energy_capacity", label: "Energy Capacity", description: "Having enough physical and mental energy to begin.", value: 4, note: "" },
-      { key: "accountability", label: "Accountability", description: "A person, coach, class, or commitment that keeps you showing up.", value: 4, note: "" },
-      { key: "recovery", label: "Recovery", description: "Your ability to rest enough so the habit stays sustainable.", value: 4, note: "" },
-      { key: "confidence", label: "Confidence", description: "Belief that you can do the next session without overthinking it.", value: 4, note: "" },
-      { key: "environment", label: "Helpful Environment", description: "Access to a space, gear, or setup that reduces friction.", value: 4, note: "" },
-      { key: "tracking", label: "Simple Tracking", description: "A lightweight way to see streaks, sessions, or small wins.", value: 4, note: "" }
+      {
+        key: "routine_anchor",
+        label: "Routine Anchor",
+        description: "A reliable time slot or trigger that helps the habit happen.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "exercise_clarity",
+        label: "Exercise Clarity",
+        description: "Knowing what kind of workout to do when the session starts.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "energy_capacity",
+        label: "Energy Capacity",
+        description: "Having enough physical and mental energy to begin.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "accountability",
+        label: "Accountability",
+        description: "A person, coach, class, or commitment that keeps you showing up.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "recovery",
+        label: "Recovery",
+        description: "Your ability to rest enough so the habit stays sustainable.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "confidence",
+        label: "Confidence",
+        description: "Belief that you can do the next session without overthinking it.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "environment",
+        label: "Helpful Environment",
+        description: "Access to a space, gear, or setup that reduces friction.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "tracking",
+        label: "Simple Tracking",
+        description: "A lightweight way to see streaks, sessions, or small wins.",
+        value: 4,
+        note: ""
+      }
     ],
     obstacles: [
-      { key: "time_fragmentation", label: "Time Fragmentation", description: "Your available time is split up or frequently interrupted.", value: 0, active: false },
-      { key: "uncertainty", label: "Exercise Uncertainty", description: "Not knowing what to do makes starting harder.", value: 0, active: false },
-      { key: "low_energy", label: "Low Energy", description: "Fatigue makes follow-through less consistent.", value: 0, active: false },
-      { key: "low_motivation", label: "Low Motivation", description: "The habit does not yet feel emotionally rewarding or urgent.", value: 0, active: false },
-      { key: "inconsistency", label: "Inconsistency Risk", description: "The plan may be too ambitious to repeat every week.", value: 0, active: false }
+      {
+        key: "time_fragmentation",
+        label: "Time Fragmentation",
+        description: "Your available time is split up or frequently interrupted.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "uncertainty",
+        label: "Exercise Uncertainty",
+        description: "Not knowing what to do makes starting harder.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "low_energy",
+        label: "Low Energy",
+        description: "Fatigue makes follow-through less consistent.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "low_motivation",
+        label: "Low Motivation",
+        description: "The habit does not yet feel emotionally rewarding or urgent.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "inconsistency",
+        label: "Inconsistency Risk",
+        description: "The plan may be too ambitious to repeat every week.",
+        value: 0,
+        active: false
+      }
     ]
   },
   {
@@ -383,27 +463,106 @@ const goalCatalog = [
       }
     ],
     resources: [
-      { key: "curation_clarity", label: "Project Curation", description: "Confidence in which pieces belong in the portfolio.", value: 4, note: "" },
-      { key: "storytelling", label: "Case Study Writing", description: "Ability to explain context, process, and outcomes clearly.", value: 4, note: "" },
-      { key: "time_blocks", label: "Focused Time Blocks", description: "Protected time for editing, writing, and polishing.", value: 4, note: "" },
-      { key: "feedback_loop", label: "Feedback Loop", description: "Trusted input that helps you improve faster.", value: 4, note: "" },
-      { key: "publishing_readiness", label: "Publishing Readiness", description: "Willingness to put the work online without over-polishing.", value: 4, note: "" },
-      { key: "confidence", label: "Creative Confidence", description: "Belief that your work is worth presenting.", value: 4, note: "" },
-      { key: "momentum", label: "Momentum", description: "Current energy for moving the portfolio toward completion.", value: 4, note: "" },
-      { key: "presentation_quality", label: "Presentation Quality", description: "Visual polish and organization that supports the story.", value: 4, note: "" }
+      {
+        key: "curation_clarity",
+        label: "Project Curation",
+        description: "Confidence in which pieces belong in the portfolio.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "storytelling",
+        label: "Case Study Writing",
+        description: "Ability to explain context, process, and outcomes clearly.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "time_blocks",
+        label: "Focused Time Blocks",
+        description: "Protected time for editing, writing, and polishing.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "feedback_loop",
+        label: "Feedback Loop",
+        description: "Trusted input that helps you improve faster.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "publishing_readiness",
+        label: "Publishing Readiness",
+        description: "Willingness to put the work online without over-polishing.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "confidence",
+        label: "Creative Confidence",
+        description: "Belief that your work is worth presenting.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "momentum",
+        label: "Momentum",
+        description: "Current energy for moving the portfolio toward completion.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "presentation_quality",
+        label: "Presentation Quality",
+        description: "Visual polish and organization that supports the story.",
+        value: 4,
+        note: ""
+      }
     ],
     obstacles: [
-      { key: "selection_confusion", label: "Selection Confusion", description: "Too many possible pieces make it hard to choose a final set.", value: 0, active: false },
-      { key: "writing_friction", label: "Writing Friction", description: "Explaining the work feels harder than doing the work.", value: 0, active: false },
-      { key: "time_pressure", label: "Time Pressure", description: "Portfolio work keeps losing against more urgent tasks.", value: 0, active: false },
-      { key: "isolation", label: "Limited Feedback", description: "Lack of outside perspective slows decisions.", value: 0, active: false },
-      { key: "perfectionism", label: "Perfectionism", description: "Fear of publishing keeps the project unfinished.", value: 0, active: false }
+      {
+        key: "selection_confusion",
+        label: "Selection Confusion",
+        description: "Too many possible pieces make it hard to choose a final set.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "writing_friction",
+        label: "Writing Friction",
+        description: "Explaining the work feels harder than doing the work.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "time_pressure",
+        label: "Time Pressure",
+        description: "Portfolio work keeps losing against more urgent tasks.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "isolation",
+        label: "Limited Feedback",
+        description: "Lack of outside perspective slows decisions.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "perfectionism",
+        label: "Perfectionism",
+        description: "Fear of publishing keeps the project unfinished.",
+        value: 0,
+        active: false
+      }
     ]
   },
   {
     key: "prepare_new_role",
     label: "Prepare for a new role",
-    description: "Build readiness and confidence for stepping into a stronger role or responsibility.",
+    description:
+      "Build readiness and confidence for stepping into a stronger role or responsibility.",
     questions: [
       {
         key: "target_clarity",
@@ -562,21 +721,99 @@ const goalCatalog = [
       }
     ],
     resources: [
-      { key: "role_clarity", label: "Role Clarity", description: "A clear understanding of what the new role really demands.", value: 4, note: "" },
-      { key: "learning_plan", label: "Learning Plan", description: "A focused path for closing important skill gaps.", value: 4, note: "" },
-      { key: "mentorship", label: "Mentorship", description: "Access to advice from people already operating at that level.", value: 4, note: "" },
-      { key: "practice_time", label: "Practice Time", description: "Protected time for preparation, rehearsal, or study.", value: 4, note: "" },
-      { key: "confidence", label: "Professional Confidence", description: "Belief that you can step into the role and grow from there.", value: 4, note: "" },
-      { key: "communication", label: "Communication Strength", description: "Ability to speak clearly about your thinking and decisions.", value: 4, note: "" },
-      { key: "feedback_speed", label: "Fast Feedback", description: "How quickly you can learn from corrections and examples.", value: 4, note: "" },
-      { key: "consistency", label: "Consistency", description: "Your ability to prepare steadily rather than in bursts.", value: 4, note: "" }
+      {
+        key: "role_clarity",
+        label: "Role Clarity",
+        description: "A clear understanding of what the new role really demands.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "learning_plan",
+        label: "Learning Plan",
+        description: "A focused path for closing important skill gaps.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "mentorship",
+        label: "Mentorship",
+        description: "Access to advice from people already operating at that level.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "practice_time",
+        label: "Practice Time",
+        description: "Protected time for preparation, rehearsal, or study.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "confidence",
+        label: "Professional Confidence",
+        description: "Belief that you can step into the role and grow from there.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "communication",
+        label: "Communication Strength",
+        description: "Ability to speak clearly about your thinking and decisions.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "feedback_speed",
+        label: "Fast Feedback",
+        description: "How quickly you can learn from corrections and examples.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "consistency",
+        label: "Consistency",
+        description: "Your ability to prepare steadily rather than in bursts.",
+        value: 4,
+        note: ""
+      }
     ],
     obstacles: [
-      { key: "unclear_target", label: "Unclear Target", description: "You may still be preparing for a vague or moving target.", value: 0, active: false },
-      { key: "skill_gap_pressure", label: "Skill Gap Pressure", description: "The distance between current skills and target expectations feels heavy.", value: 0, active: false },
-      { key: "isolation", label: "Isolation", description: "Lack of guidance makes it harder to judge real readiness.", value: 0, active: false },
-      { key: "time_pressure", label: "Time Pressure", description: "Preparation competes with work, family, or other responsibilities.", value: 0, active: false },
-      { key: "self_doubt", label: "Self-Doubt", description: "You may be discounting your current ability to grow into the role.", value: 0, active: false }
+      {
+        key: "unclear_target",
+        label: "Unclear Target",
+        description: "You may still be preparing for a vague or moving target.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "skill_gap_pressure",
+        label: "Skill Gap Pressure",
+        description: "The distance between current skills and target expectations feels heavy.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "isolation",
+        label: "Isolation",
+        description: "Lack of guidance makes it harder to judge real readiness.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "time_pressure",
+        label: "Time Pressure",
+        description: "Preparation competes with work, family, or other responsibilities.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "self_doubt",
+        label: "Self-Doubt",
+        description: "You may be discounting your current ability to grow into the role.",
+        value: 0,
+        active: false
+      }
     ]
   },
   {
@@ -741,21 +978,100 @@ const goalCatalog = [
       }
     ],
     resources: [
-      { key: "money_visibility", label: "Money Visibility", description: "A clear view of income, bills, and spending patterns.", value: 4, note: "" },
-      { key: "spending_control", label: "Spending Control", description: "Ability to direct optional spending toward priorities.", value: 4, note: "" },
-      { key: "stability", label: "Income Stability", description: "Reliability of current income or financial baseline.", value: 4, note: "" },
-      { key: "accountability", label: "Accountability", description: "Helpful systems, reminders, or people that reinforce the plan.", value: 4, note: "" },
-      { key: "planning", label: "Financial Planning", description: "A clear, realistic structure for what happens next.", value: 4, note: "" },
-      { key: "savings_buffer", label: "Savings Buffer", description: "A cushion that reduces panic and increases flexibility.", value: 4, note: "" },
-      { key: "emotional_capacity", label: "Emotional Capacity", description: "Ability to deal with money decisions without shutting down.", value: 4, note: "" },
-      { key: "consistency", label: "Habit Consistency", description: "Capacity to repeat small financial actions week after week.", value: 4, note: "" }
+      {
+        key: "money_visibility",
+        label: "Money Visibility",
+        description: "A clear view of income, bills, and spending patterns.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "spending_control",
+        label: "Spending Control",
+        description: "Ability to direct optional spending toward priorities.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "stability",
+        label: "Income Stability",
+        description: "Reliability of current income or financial baseline.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "accountability",
+        label: "Accountability",
+        description: "Helpful systems, reminders, or people that reinforce the plan.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "planning",
+        label: "Financial Planning",
+        description: "A clear, realistic structure for what happens next.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "savings_buffer",
+        label: "Savings Buffer",
+        description: "A cushion that reduces panic and increases flexibility.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "emotional_capacity",
+        label: "Emotional Capacity",
+        description: "Ability to deal with money decisions without shutting down.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "consistency",
+        label: "Habit Consistency",
+        description: "Capacity to repeat small financial actions week after week.",
+        value: 4,
+        note: ""
+      }
     ],
     obstacles: [
-      { key: "unclear_spending", label: "Unclear Spending", description: "You may not yet have a sharp picture of where money is going.", value: 0, active: false },
-      { key: "impulse_spending", label: "Impulse Spending", description: "Unplanned purchases may be weakening progress.", value: 0, active: false },
-      { key: "income_variability", label: "Income Variability", description: "Changing income makes planning feel fragile.", value: 0, active: false },
-      { key: "decision_fatigue", label: "Decision Fatigue", description: "Too many choices make consistent action harder.", value: 0, active: false },
-      { key: "overwhelm", label: "Overwhelm", description: "Pressure around money may be making the plan feel heavier than it needs to be.", value: 0, active: false }
+      {
+        key: "unclear_spending",
+        label: "Unclear Spending",
+        description: "You may not yet have a sharp picture of where money is going.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "impulse_spending",
+        label: "Impulse Spending",
+        description: "Unplanned purchases may be weakening progress.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "income_variability",
+        label: "Income Variability",
+        description: "Changing income makes planning feel fragile.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "decision_fatigue",
+        label: "Decision Fatigue",
+        description: "Too many choices make consistent action harder.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "overwhelm",
+        label: "Overwhelm",
+        description:
+          "Pressure around money may be making the plan feel heavier than it needs to be.",
+        value: 0,
+        active: false
+      }
     ]
   },
   {
@@ -920,21 +1236,99 @@ const goalCatalog = [
       }
     ],
     resources: [
-      { key: "environment", label: "Helpful Environment", description: "A space and setup that support attention.", value: 4, note: "" },
-      { key: "task_clarity", label: "Task Clarity", description: "Knowing the next meaningful thing to do without delay.", value: 4, note: "" },
-      { key: "energy_regulation", label: "Energy Regulation", description: "A steadier mental and physical rhythm across the day.", value: 4, note: "" },
-      { key: "boundary_control", label: "Boundary Control", description: "Ability to protect focus from notifications and interruptions.", value: 4, note: "" },
-      { key: "reset_skill", label: "Restart Skill", description: "Ability to recover after distraction without spiraling.", value: 4, note: "" },
-      { key: "deep_work_blocks", label: "Deep Work Blocks", description: "Protected windows for concentrated work.", value: 4, note: "" },
-      { key: "recovery", label: "Recovery Rhythm", description: "Breaks and rest that help attention come back.", value: 4, note: "" },
-      { key: "prioritization", label: "Prioritization", description: "Choosing the task that matters most right now.", value: 4, note: "" }
+      {
+        key: "environment",
+        label: "Helpful Environment",
+        description: "A space and setup that support attention.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "task_clarity",
+        label: "Task Clarity",
+        description: "Knowing the next meaningful thing to do without delay.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "energy_regulation",
+        label: "Energy Regulation",
+        description: "A steadier mental and physical rhythm across the day.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "boundary_control",
+        label: "Boundary Control",
+        description: "Ability to protect focus from notifications and interruptions.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "reset_skill",
+        label: "Restart Skill",
+        description: "Ability to recover after distraction without spiraling.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "deep_work_blocks",
+        label: "Deep Work Blocks",
+        description: "Protected windows for concentrated work.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "recovery",
+        label: "Recovery Rhythm",
+        description: "Breaks and rest that help attention come back.",
+        value: 4,
+        note: ""
+      },
+      {
+        key: "prioritization",
+        label: "Prioritization",
+        description: "Choosing the task that matters most right now.",
+        value: 4,
+        note: ""
+      }
     ],
     obstacles: [
-      { key: "distraction_load", label: "Distraction Load", description: "Your environment may be pulling attention in too many directions.", value: 0, active: false },
-      { key: "ambiguity", label: "Ambiguity", description: "Unclear next steps can quietly drain focus.", value: 0, active: false },
-      { key: "fatigue", label: "Fatigue", description: "Low or unstable energy may be undermining concentration.", value: 0, active: false },
-      { key: "digital_drift", label: "Digital Drift", description: "Devices and notifications are likely stealing momentum.", value: 0, active: false },
-      { key: "self_judgment", label: "Self-Judgment", description: "Harsh self-talk after distraction makes it harder to restart.", value: 0, active: false }
+      {
+        key: "distraction_load",
+        label: "Distraction Load",
+        description: "Your environment may be pulling attention in too many directions.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "ambiguity",
+        label: "Ambiguity",
+        description: "Unclear next steps can quietly drain focus.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "fatigue",
+        label: "Fatigue",
+        description: "Low or unstable energy may be undermining concentration.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "digital_drift",
+        label: "Digital Drift",
+        description: "Devices and notifications are likely stealing momentum.",
+        value: 0,
+        active: false
+      },
+      {
+        key: "self_judgment",
+        label: "Self-Judgment",
+        description: "Harsh self-talk after distraction makes it harder to restart.",
+        value: 0,
+        active: false
+      }
     ]
   }
 ];
@@ -949,11 +1343,15 @@ function normalizeOptionEffects(option, resourceKeys, obstacleKeys) {
   const obstacleEffects = {};
 
   resourceKeys.forEach((key) => {
-    resourceEffects[key] = Number(rawEffects.resources && rawEffects.resources[key] ? rawEffects.resources[key] : 0);
+    resourceEffects[key] = Number(
+      rawEffects.resources && rawEffects.resources[key] ? rawEffects.resources[key] : 0
+    );
   });
 
   obstacleKeys.forEach((key) => {
-    obstacleEffects[key] = Number(rawEffects.obstacles && rawEffects.obstacles[key] ? rawEffects.obstacles[key] : 0);
+    obstacleEffects[key] = Number(
+      rawEffects.obstacles && rawEffects.obstacles[key] ? rawEffects.obstacles[key] : 0
+    );
   });
 
   return {
@@ -964,7 +1362,9 @@ function normalizeOptionEffects(option, resourceKeys, obstacleKeys) {
 
 function trimGoalDefinition(goal) {
   const resources = goal.resources.slice(0, RESOURCE_LIMIT).map((resource) => ({ ...resource }));
-  const obstacles = goal.obstacles.slice(0, OBSTACLE_LIMIT).map((obstacle) => ({ ...obstacle, note: obstacle.note || "" }));
+  const obstacles = goal.obstacles
+    .slice(0, OBSTACLE_LIMIT)
+    .map((obstacle) => ({ ...obstacle, note: obstacle.note || "" }));
   const resourceKeys = resources.map((resource) => resource.key);
   const obstacleKeys = obstacles.map((obstacle) => obstacle.key);
   const questions = goal.questions.slice(0, QUESTION_LIMIT).map((question) => ({

@@ -33,9 +33,7 @@ function logResponse(endpoint, model, response) {
   console.log(response && response.text ? response.text : "");
   console.log("context:");
   console.log(
-    response && Array.isArray(response.context)
-      ? `[${response.context.length} tokens]`
-      : "null"
+    response && Array.isArray(response.context) ? `[${response.context.length} tokens]` : "null"
   );
   console.log("[ollama] end response");
 }
@@ -156,7 +154,9 @@ function extractJsonObject(text) {
     const match = trimmed.match(/\{[\s\S]*\}/);
 
     if (!match) {
-      throw new Error(`Could not extract JSON object from Ollama response: ${trimmed.slice(0, 500)}`);
+      throw new Error(
+        `Could not extract JSON object from Ollama response: ${trimmed.slice(0, 500)}`
+      );
     }
 
     return JSON.parse(match[0]);

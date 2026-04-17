@@ -75,37 +75,27 @@ module.exports = [
         assert.strictEqual(goalResponse.body.goal.key, "improve_finances");
         assert.strictEqual(goalResponse.body.goal.resources.length, 4);
 
-        const suggestionResponse = await requestJson(
-          port,
-          "/api/progress/suggestions",
-          "POST",
-          {
-            goal: goalResponse.body.goal,
-            goalText: "Improve my finances",
-            goalKey: "improve_finances",
-            answers: {
-              money_visibility: "clear",
-              expense_control: "good",
-              income_stability: "stable",
-              support_system: "yes"
-            }
+        const suggestionResponse = await requestJson(port, "/api/progress/suggestions", "POST", {
+          goal: goalResponse.body.goal,
+          goalText: "Improve my finances",
+          goalKey: "improve_finances",
+          answers: {
+            money_visibility: "clear",
+            expense_control: "good",
+            income_stability: "stable",
+            support_system: "yes"
           }
-        );
+        });
 
         assert.strictEqual(suggestionResponse.statusCode, 200);
         assert.strictEqual(suggestionResponse.body.goal.key, "improve_finances");
         assert.strictEqual(suggestionResponse.body.profile.positiveFactors.length, 4);
 
-        const evaluationResponse = await requestJson(
-          port,
-          "/api/progress/evaluations",
-          "POST",
-          {
-            goalKey: "improve_finances",
-            goal: "Improve my finances",
-            profile: suggestionResponse.body.profile
-          }
-        );
+        const evaluationResponse = await requestJson(port, "/api/progress/evaluations", "POST", {
+          goalKey: "improve_finances",
+          goal: "Improve my finances",
+          profile: suggestionResponse.body.profile
+        });
 
         assert.strictEqual(evaluationResponse.statusCode, 200);
         assert.strictEqual(typeof evaluationResponse.body.score, "number");
@@ -146,16 +136,15 @@ module.exports = [
       const port = server.address().port;
 
       try {
-        const goalPlanResponse = await requestJson(
-          port,
-          "/api/progress/goal-plan",
-          "POST",
-          { goalText: "Finish my portfolio" }
-        );
+        const goalPlanResponse = await requestJson(port, "/api/progress/goal-plan", "POST", {
+          goalText: "Finish my portfolio"
+        });
 
         assert.strictEqual(goalPlanResponse.statusCode, 502);
         assert.strictEqual(goalPlanResponse.body.code, "PROVIDER_FAILURE");
-        assert.ok(/Ollama could not complete the planning step/i.test(goalPlanResponse.body.userMessage));
+        assert.ok(
+          /Ollama could not complete the planning step/i.test(goalPlanResponse.body.userMessage)
+        );
         assert.ok(typeof goalPlanResponse.body.details === "string");
       } finally {
         process.env.PLANNING_PROVIDER = "mock";

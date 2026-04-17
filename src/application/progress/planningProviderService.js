@@ -86,10 +86,14 @@ function humanizeValue(value, fallback) {
 }
 
 function createGeneratedOptions(question, base) {
-  const initialLabel = question && question.initial
-    ? humanizeValue(question.initial, "Current Fit")
-    : humanizeValue(base.initial, "Current Fit");
-  const initialValue = slugifyValue(question && question.initial ? question.initial : base.initial, "current_fit");
+  const initialLabel =
+    question && question.initial
+      ? humanizeValue(question.initial, "Current Fit")
+      : humanizeValue(base.initial, "Current Fit");
+  const initialValue = slugifyValue(
+    question && question.initial ? question.initial : base.initial,
+    "current_fit"
+  );
 
   return [
     {
@@ -109,15 +113,18 @@ function createGeneratedOptions(question, base) {
 
 function normalizePlan(rawPlan, baseGoal) {
   const fallback = clone(baseGoal);
-  const rawResources = rawPlan && Array.isArray(rawPlan.resources)
-    ? rawPlan.resources.slice(0, fallback.resources.length)
-    : null;
-  const rawObstacles = rawPlan && Array.isArray(rawPlan.obstacles)
-    ? rawPlan.obstacles.slice(0, fallback.obstacles.length)
-    : null;
-  const rawQuestions = rawPlan && Array.isArray(rawPlan.questions)
-    ? rawPlan.questions.slice(0, fallback.questions.length)
-    : Array.isArray(rawPlan)
+  const rawResources =
+    rawPlan && Array.isArray(rawPlan.resources)
+      ? rawPlan.resources.slice(0, fallback.resources.length)
+      : null;
+  const rawObstacles =
+    rawPlan && Array.isArray(rawPlan.obstacles)
+      ? rawPlan.obstacles.slice(0, fallback.obstacles.length)
+      : null;
+  const rawQuestions =
+    rawPlan && Array.isArray(rawPlan.questions)
+      ? rawPlan.questions.slice(0, fallback.questions.length)
+      : Array.isArray(rawPlan)
       ? rawPlan.slice(0, fallback.questions.length)
       : [];
 
@@ -130,7 +137,8 @@ function normalizePlan(rawPlan, baseGoal) {
     return {
       key: base.key,
       label: resource && resource.label ? String(resource.label) : base.label,
-      description: resource && resource.description ? String(resource.description) : base.description,
+      description:
+        resource && resource.description ? String(resource.description) : base.description,
       value: typeof base.value === "number" ? base.value : 4,
       note: ""
     };
@@ -141,7 +149,8 @@ function normalizePlan(rawPlan, baseGoal) {
     return {
       key: base.key,
       label: obstacle && obstacle.label ? String(obstacle.label) : base.label,
-      description: obstacle && obstacle.description ? String(obstacle.description) : base.description,
+      description:
+        obstacle && obstacle.description ? String(obstacle.description) : base.description,
       value: 0,
       active: false,
       note: ""
@@ -153,18 +162,19 @@ function normalizePlan(rawPlan, baseGoal) {
 
   const questions = rawQuestions.map((question, index) => {
     const base = fallback.questions[index] || fallback.questions[fallback.questions.length - 1];
-    const rawOptions = question && Array.isArray(question.options)
-      ? question.options.slice(0, 3)
-      : question && Array.isArray(question.optionValues)
+    const rawOptions =
+      question && Array.isArray(question.options)
+        ? question.options.slice(0, 3)
+        : question && Array.isArray(question.optionValues)
         ? question.optionValues.slice(0, 3).map((value, optionIndex) => ({
-          value: String(value),
-          label: base.options[optionIndex] ? base.options[optionIndex].label : String(value)
-        }))
+            value: String(value),
+            label: base.options[optionIndex] ? base.options[optionIndex].label : String(value)
+          }))
         : createGeneratedOptions(question || {}, base);
-    const normalizedOptions = rawOptions.length === 3 ? rawOptions : createGeneratedOptions(question || {}, base);
-    const normalizedInitialValue = question && question.initial
-      ? slugifyValue(question.initial, base.initial)
-      : base.initial;
+    const normalizedOptions =
+      rawOptions.length === 3 ? rawOptions : createGeneratedOptions(question || {}, base);
+    const normalizedInitialValue =
+      question && question.initial ? slugifyValue(question.initial, base.initial) : base.initial;
 
     return {
       key: question && question.key ? String(question.key) : base.key,
@@ -172,12 +182,18 @@ function normalizePlan(rawPlan, baseGoal) {
       initial: normalizedOptions.some((option) => option.value === normalizedInitialValue)
         ? normalizedInitialValue
         : normalizedOptions[1]
-          ? normalizedOptions[1].value
-          : normalizedOptions[0].value,
+        ? normalizedOptions[1].value
+        : normalizedOptions[0].value,
       options: normalizedOptions.map((option, optionIndex) => {
         const baseOption = base.options[optionIndex];
         return {
-          value: option && option.value ? slugifyValue(option.value, baseOption ? baseOption.value : `option_${optionIndex + 1}`) : baseOption.value,
+          value:
+            option && option.value
+              ? slugifyValue(
+                  option.value,
+                  baseOption ? baseOption.value : `option_${optionIndex + 1}`
+                )
+              : baseOption.value,
           label: option && option.label ? String(option.label) : baseOption.label,
           effects: normalizeOptionEffects(option, resourceKeys, obstacleKeys)
         };
@@ -188,7 +204,8 @@ function normalizePlan(rawPlan, baseGoal) {
   return {
     key: fallback.key,
     label: fallback.label,
-    description: rawPlan && rawPlan.description ? String(rawPlan.description) : fallback.description,
+    description:
+      rawPlan && rawPlan.description ? String(rawPlan.description) : fallback.description,
     provider: rawPlan && rawPlan.provider ? String(rawPlan.provider) : null,
     providerError: rawPlan && rawPlan.providerError ? String(rawPlan.providerError) : null,
     questions,
@@ -252,7 +269,9 @@ async function checkPlanningProvider() {
 async function loadGoalPlan(goalKey, goalText, providerContext) {
   const resolvedGoalKey = goalKey || getDefaultGoalKey();
   const provider = createPlanningProvider();
-  const cacheGoalText = String(goalText || "").trim().toLowerCase();
+  const cacheGoalText = String(goalText || "")
+    .trim()
+    .toLowerCase();
   const cacheKey = `${provider.name}:${resolvedGoalKey}:${cacheGoalText}`;
 
   if (goalPlanCache[cacheKey]) {
@@ -277,9 +296,10 @@ async function loadGoalPlan(goalKey, goalText, providerContext) {
 
     normalized.provider = provider.name;
     normalized.providerError = null;
-    normalized.providerContext = generated && Object.prototype.hasOwnProperty.call(generated, "providerContext")
-      ? generated.providerContext
-      : null;
+    normalized.providerContext =
+      generated && Object.prototype.hasOwnProperty.call(generated, "providerContext")
+        ? generated.providerContext
+        : null;
     goalPlanCache[cacheKey] = normalized;
     return clone(normalized);
   } catch (error) {
