@@ -1,6 +1,10 @@
 const express = require("express");
 const path = require("path");
 const {
+  getPublicAppConfig,
+  toPublicConfigScript
+} = require("../../../../shared/config/publicAppConfig");
+const {
   getGoalExperience,
   getGoalExperienceFromText,
   buildSuggestedProfile,
@@ -19,9 +23,13 @@ function sendError(res, error) {
 
 function createApp() {
   const app = express();
-  const publicPath = path.join(__dirname, "../../../public");
+  const publicPath = path.join(__dirname, "../../../../frontend/public");
 
   app.use(express.json());
+  app.get("/app-config.js", (req, res) => {
+    res.type("application/javascript");
+    res.send(toPublicConfigScript(getPublicAppConfig()));
+  });
   app.use(express.static(publicPath));
 
   app.get("/api/progress/config", (req, res) => {

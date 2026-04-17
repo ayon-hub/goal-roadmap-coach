@@ -8,16 +8,19 @@
     "node": ">=20 <21"
   },
   "scripts": {
-    "start": "node server.js",
-    "dev": "PLANNING_PROVIDER=mock SUGGESTION_PROVIDER=mock RESULT_PROVIDER=mock node server.js",
-    "start:mock": "PLANNING_PROVIDER=mock SUGGESTION_PROVIDER=mock RESULT_PROVIDER=mock node server.js",
+    "start": "node backend/server.js",
+    "dev": "PLANNING_PROVIDER=mock SUGGESTION_PROVIDER=mock RESULT_PROVIDER=mock node backend/server.js",
+    "start:mock": "PLANNING_PROVIDER=mock SUGGESTION_PROVIDER=mock RESULT_PROVIDER=mock node backend/server.js",
     "start:ollama": "bash scripts/run-ollama.sh",
+    "frontend:preview": "node frontend/tools/preview-static.js",
+    "backend:start": "node backend/server.js",
+    "backend:test": "node backend/test/run-tests.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "node test/run-tests.js",
-    "coverage": "c8 --reporter=text --reporter=lcov --reporter=html node test/run-tests.js"
+    "test": "node backend/test/run-tests.js",
+    "coverage": "c8 --reporter=text --reporter=lcov --reporter=html node backend/test/run-tests.js"
   },
   "keywords": [
     "express",

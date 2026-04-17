@@ -1,0 +1,11 @@
+{
+  "name": "@goal-roadmap-coach/backend",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/run-tests.js",
+    "lint": "../node_modules/.bin/eslint .",
+    "format:check": "../node_modules/.bin/prettier --check ."
+  }
+}

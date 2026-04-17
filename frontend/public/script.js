@@ -95,10 +95,21 @@ const errorRetryButton = document.getElementById("errorRetryButton");
 const errorCloseButton = document.getElementById("errorCloseButton");
 
 const themeOptions = new Set(["mild-light", "cream", "dark"]);
+const appConfig =
+  window.__APP_CONFIG__ && typeof window.__APP_CONFIG__ === "object" ? window.__APP_CONFIG__ : {};
+const apiBaseUrl = typeof appConfig.apiBaseUrl === "string" ? appConfig.apiBaseUrl : "";
 let retryAction = null;
 
+function buildApiUrl(url) {
+  if (/^https?:\/\//i.test(url)) {
+    return url;
+  }
+
+  return `${apiBaseUrl}${url}`;
+}
+
 async function fetchJson(url, options) {
-  const response = await fetch(url, {
+  const response = await fetch(buildApiUrl(url), {
     headers: {
       "Content-Type": "application/json"
     },

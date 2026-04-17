@@ -1,0 +1,9 @@
+{
+  "name": "@goal-roadmap-coach/frontend",
+  "private": true,
+  "scripts": {
+    "preview": "node tools/preview-static.js",
+    "lint": "../node_modules/.bin/eslint public",
+    "format:check": "../node_modules/.bin/prettier --check public tools"
+  }
+}

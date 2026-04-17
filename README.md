@@ -11,6 +11,7 @@ Runtime baseline:
 CI baseline:
 
 - GitHub Actions runs install, lint, format check, tests, and coverage on push and pull request
+- frontend, backend, and shared runtime config are separated physically
 
 ## Product direction
 
@@ -40,22 +41,27 @@ Planned future additions:
 goal-roadmap-coach/
 ├── package.json
 ├── server.js
-├── src/
-│   ├── application/progress/
-│   ├── domain/progress/
-│   └── infrastructure/http/
-├── public/
-│   ├── index.html
-│   ├── style.css
-│   ├── script.js
-│   └── images/
-├── test/
-│   ├── flowService.test.js
-│   ├── http.test.js
-│   ├── progressService.test.js
-│   └── run-tests.js
+├── backend/
+│   ├── package.json
+│   ├── server.js
+│   ├── src/
+│   └── test/
+├── frontend/
+│   ├── package.json
+│   ├── public/
+│   └── tools/
+├── shared/
+│   └── config/
 └── agent-context/
 ```
+
+## Runtime separation
+
+- `backend/` owns the Express server, domain logic, provider integration, and tests
+- `frontend/` owns the browser app and static assets
+- `shared/` owns runtime configuration that both layers depend on
+- the frontend reads `window.__APP_CONFIG__.apiBaseUrl`, served by the backend at `/app-config.js`
+- `backend/package.json` and `frontend/package.json` define local scripts for each side
 
 ## Current flow
 
@@ -134,6 +140,7 @@ Environment variables:
 PLANNING_PROVIDER=mock|ollama
 SUGGESTION_PROVIDER=mock|ollama
 RESULT_PROVIDER=mock|ollama
+PUBLIC_API_BASE_URL=
 OLLAMA_MODEL=qwen2.5:1.5b
 OLLAMA_PLANNING_MODEL=qwen2.5:1.5b
 OLLAMA_SUGGESTION_MODEL=qwen2.5:1.5b
@@ -212,6 +219,12 @@ Timeouts:
 
    ```bash
    npm start
+   ```
+
+   Frontend-only preview:
+
+   ```bash
+   npm run frontend:preview
    ```
 
 3. Run tests:

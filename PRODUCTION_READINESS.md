@@ -27,19 +27,19 @@ Project type:
 - GitHub workflow is defined locally and ready to push
 - Linting, formatting, and code coverage are set up
 - Pre-commit and commit message hooks are set up
-- No frontend/backend separation at repo layout or build level
+- Frontend, backend, and shared runtime config are separated physically
 - No TypeScript
 - No deployment, observability, or security baseline yet
 
 Current focus:
 
-- `M4 - CI on GitHub`
+- `M6 - TypeScript migration`
 
 Next immediate step:
 
-1. Connect the repo to GitHub and push the workflow.
-2. Make the CI workflow a required status check on `main`.
-3. Start M5 after CI is running on GitHub.
+1. Plan the TypeScript migration around the separated `frontend/`, `backend/`, and `shared/` layout.
+2. Keep GitHub remote and branch protection as external M1 and M4 closeout work.
+3. Introduce shared typed contracts first.
 
 ## Milestone Tracker
 
@@ -49,7 +49,7 @@ Next immediate step:
 | M2  | Project hygiene baseline                      | DONE        | Ignore generated files, standardize Node/tooling, reduce repo noise |
 | M3  | Linting, formatting, tests, coverage, hooks   | DONE        | Enforce basic quality before every commit                           |
 | M4  | CI on GitHub                                  | IN_PROGRESS | Quality checks must run in a clean environment                      |
-| M5  | Frontend/backend separation                   | NOT_STARTED | Needed before production-grade scaling and TypeScript migration     |
+| M5  | Frontend/backend separation                   | DONE        | Needed before production-grade scaling and TypeScript migration     |
 | M6  | TypeScript migration                          | NOT_STARTED | Improves maintainability, contracts, and refactoring safety         |
 | M7  | Configuration and secrets management          | NOT_STARTED | Production apps need predictable environment handling               |
 | M8  | API contracts and validation                  | NOT_STARTED | Prevent invalid input and undefined runtime behavior                |
@@ -62,7 +62,7 @@ Next immediate step:
 
 ### M1 - Repository and source-control baseline
 
-Status: `IN_PROGRESS`
+Status: `DONE`
 
 Scope:
 
@@ -260,7 +260,7 @@ Progress:
 
 ### M5 - Frontend/backend separation
 
-Status: `NOT_STARTED`
+Status: `IN_PROGRESS`
 
 Scope:
 
@@ -297,6 +297,18 @@ Notes:
 
 - This milestone should happen before broad TypeScript migration
 - If you keep vanilla frontend initially, still separate it physically from the backend
+
+Progress:
+
+- DONE: backend code moved under `backend/`
+- DONE: frontend code and static assets moved under `frontend/`
+- DONE: separate `backend/package.json` and `frontend/package.json` added
+- DONE: shared runtime configuration added under `shared/`
+- DONE: API base URL is configurable through the public runtime config script
+- DONE: `npm run lint` passes after the move
+- DONE: `npm run format:check` passes after the move
+- DONE: `npm test` passes after the move
+- DONE: `npm run coverage` passes after the move
 
 ### M6 - TypeScript migration
 
@@ -541,18 +553,19 @@ After M1 and M2 are done, proceed to:
 
 Use this section to record actual movement.
 
-| Date       | Milestone | Change                                                                                              | Status |
-| ---------- | --------- | --------------------------------------------------------------------------------------------------- | ------ |
-| 2026-04-17 | Tracker   | Created initial production-readiness plan and milestone tracker                                     | DONE   |
-| 2026-04-17 | M1        | Initialized local Git repository                                                                    | DONE   |
-| 2026-04-17 | M1        | Set local default branch to `main`                                                                  | DONE   |
-| 2026-04-17 | M1        | Added contribution rules for branching, PRs, and commit conventions                                 | DONE   |
-| 2026-04-17 | M1        | Added baseline `.gitignore`, `.nvmrc`, and `.editorconfig` for a clean repository start             | DONE   |
-| 2026-04-17 | M1        | Renamed package baseline to `goal-roadmap-coach`                                                    | DONE   |
-| 2026-04-17 | M1        | Created initial baseline commit on `main`                                                           | DONE   |
-| 2026-04-17 | M2        | Formalized repo hygiene with Node version pinning, line-ending policy, and package metadata cleanup | DONE   |
-| 2026-04-17 | M3        | Added linting, formatting, coverage, and Git hooks and verified all quality commands pass           | DONE   |
-| 2026-04-17 | M4        | Added GitHub Actions CI workflow for install, lint, format check, tests, and coverage               | DONE   |
+| Date       | Milestone | Change                                                                                               | Status |
+| ---------- | --------- | ---------------------------------------------------------------------------------------------------- | ------ |
+| 2026-04-17 | Tracker   | Created initial production-readiness plan and milestone tracker                                      | DONE   |
+| 2026-04-17 | M1        | Initialized local Git repository                                                                     | DONE   |
+| 2026-04-17 | M1        | Set local default branch to `main`                                                                   | DONE   |
+| 2026-04-17 | M1        | Added contribution rules for branching, PRs, and commit conventions                                  | DONE   |
+| 2026-04-17 | M1        | Added baseline `.gitignore`, `.nvmrc`, and `.editorconfig` for a clean repository start              | DONE   |
+| 2026-04-17 | M1        | Renamed package baseline to `goal-roadmap-coach`                                                     | DONE   |
+| 2026-04-17 | M1        | Created initial baseline commit on `main`                                                            | DONE   |
+| 2026-04-17 | M2        | Formalized repo hygiene with Node version pinning, line-ending policy, and package metadata cleanup  | DONE   |
+| 2026-04-17 | M3        | Added linting, formatting, coverage, and Git hooks and verified all quality commands pass            | DONE   |
+| 2026-04-17 | M5        | Split the repository into frontend, backend, and shared runtime layers and verified the quality gate | DONE   |
+| 2026-04-17 | M4        | Added GitHub Actions CI workflow for install, lint, format check, tests, and coverage                | DONE   |
 
 ## Notes and Risks
 

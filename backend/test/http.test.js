@@ -3,10 +3,10 @@ const http = require("http");
 
 const { createApp } = require("../src/infrastructure/http/createApp");
 
-function requestJson(port, path, method, payload) {
+function request(port, path, method, payload) {
   return new Promise((resolve, reject) => {
     const body = payload ? JSON.stringify(payload) : null;
-    const request = http.request(
+    const requestInstance = http.request(
       {
         hostname: "127.0.0.1",
         port,
@@ -27,22 +27,30 @@ function requestJson(port, path, method, payload) {
         });
 
         response.on("end", () => {
-          const raw = Buffer.concat(chunks).toString("utf8");
           resolve({
             statusCode: response.statusCode,
-            body: raw ? JSON.parse(raw) : null
+            body: Buffer.concat(chunks).toString("utf8")
           });
         });
       }
     );
 
-    request.on("error", reject);
+    requestInstance.on("error", reject);
 
     if (body) {
-      request.write(body);
+      requestInstance.write(body);
     }
 
-    request.end();
+    requestInstance.end();
+  });
+}
+
+function requestJson(port, path, method, payload) {
+  return request(port, path, method, payload).then((response) => {
+    return {
+      statusCode: response.statusCode,
+      body: response.body ? JSON.parse(response.body) : null
+    };
   });
 }
 
@@ -150,6 +158,42 @@ module.exports = [
         process.env.PLANNING_PROVIDER = "mock";
         delete process.env.OLLAMA_ENDPOINT;
         delete process.env.OLLAMA_TIMEOUT_MS;
+        await new Promise((resolve, reject) => {
+          server.close((error) => {
+            if (error) {
+              reject(error);
+              return;
+            }
+
+            resolve();
+          });
+        });
+      }
+    }
+  },
+  {
+    name: "app config endpoint exposes a configurable API base url for the separated frontend",
+    async run() {
+      process.env.PUBLIC_API_BASE_URL = "https://api.example.com";
+
+      const app = createApp();
+      const server = await new Promise((resolve, reject) => {
+        const instance = app.listen(0, "127.0.0.1", () => {
+          resolve(instance);
+        });
+
+        instance.on("error", reject);
+      });
+      const port = server.address().port;
+
+      try {
+        const response = await request(port, "/app-config.js", "GET");
+
+        assert.strictEqual(response.statusCode, 200);
+        assert.ok(/window\.__APP_CONFIG__/.test(response.body));
+        assert.ok(/https:\/\/api\.example\.com/.test(response.body));
+      } finally {
+        delete process.env.PUBLIC_API_BASE_URL;
         await new Promise((resolve, reject) => {
           server.close((error) => {
             if (error) {
