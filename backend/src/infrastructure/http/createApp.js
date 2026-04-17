@@ -2,6 +2,7 @@
 
 const express = require("express");
 const path = require("path");
+const { sendIndexHtml } = require("./sendIndexHtml");
 const { sendPublicAppConfig } = require("./sendPublicAppConfig");
 const { sendJsonResult } = require("./sendJsonResult");
 const {
@@ -60,7 +61,7 @@ function createApp() {
 
   /** @param {Request} req @param {Response} res */
   app.get("/", (req, res) => {
-    res.sendFile(path.join(publicPath, "index.html"));
+    sendIndexHtml(res, publicPath);
   });
 
   return app;
