@@ -2,7 +2,11 @@
   "name": "goal-roadmap-coach",
   "version": "1.0.0",
   "description": "Goal planning coach with guided steps, deterministic scoring, and optional Ollama-backed generation.",
+  "private": true,
   "main": "server.js",
+  "engines": {
+    "node": ">=20 <21"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "PLANNING_PROVIDER=mock SUGGESTION_PROVIDER=mock RESULT_PROVIDER=mock node server.js",
@@ -12,8 +16,8 @@
   },
   "keywords": [
     "express",
-    "demo",
-    "sliders",
+    "goal-planning",
+    "ollama",
     "vanilla-js"
   ],
   "author": "",

@@ -33,21 +33,21 @@ Project type:
 
 Current focus:
 
-- `M1 - Repository and source-control baseline`
+- `M3 - Linting, formatting, tests, coverage, hooks`
 
 Next immediate step:
 
-1. Create the GitHub repository and add `origin`.
-2. Push local `main` to GitHub.
-3. Protect the `main` branch and require pull requests.
-4. Start M2 and formalize repo hygiene as the active milestone.
+1. Keep GitHub remote and branch protection as the remaining external M1 closeout.
+2. Start M3 with linting and formatting.
+3. Add coverage reporting.
+4. Add pre-commit and commit message hooks.
 
 ## Milestone Tracker
 
 | ID | Milestone | Status | Why it matters |
 | --- | --- | --- | --- |
 | M1 | Repository and source-control baseline | IN_PROGRESS | Without real version control, nothing else is safely manageable |
-| M2 | Project hygiene baseline | NOT_STARTED | Ignore generated files, standardize Node/tooling, reduce repo noise |
+| M2 | Project hygiene baseline | DONE | Ignore generated files, standardize Node/tooling, reduce repo noise |
 | M3 | Linting, formatting, tests, coverage, hooks | NOT_STARTED | Enforce basic quality before every commit |
 | M4 | CI on GitHub | NOT_STARTED | Quality checks must run in a clean environment |
 | M5 | Frontend/backend separation | NOT_STARTED | Needed before production-grade scaling and TypeScript migration |
@@ -113,7 +113,7 @@ Suggested conventions:
 
 ### M2 - Project hygiene baseline
 
-Status: `NOT_STARTED`
+Status: `DONE`
 
 Scope:
 
@@ -146,6 +146,16 @@ Recommended additions:
 
 - `.editorconfig`
 - `.gitattributes`
+
+Progress:
+
+- DONE: root `.gitignore` added and covers dependencies, env files, build artifacts, logs, IDE files, and temp files
+- DONE: `.nvmrc` added with Node 20 baseline
+- DONE: `.editorconfig` added
+- DONE: `.gitattributes` added for normalized line endings
+- DONE: `package.json` updated with clearer package naming and Node engine range
+- DONE: README updated to reference the chosen Node version
+- DONE: ignored generated files like `node_modules/` are no longer part of the tracked baseline
 
 ### M3 - Linting, formatting, tests, coverage, hooks
 
@@ -518,6 +528,7 @@ Use this section to record actual movement.
 | 2026-04-17 | M1 | Added baseline `.gitignore`, `.nvmrc`, and `.editorconfig` for a clean repository start | DONE |
 | 2026-04-17 | M1 | Renamed package baseline to `goal-roadmap-coach` | DONE |
 | 2026-04-17 | M1 | Created initial baseline commit on `main` | DONE |
+| 2026-04-17 | M2 | Formalized repo hygiene with Node version pinning, line-ending policy, and package metadata cleanup | DONE |
 
 ## Notes and Risks
 

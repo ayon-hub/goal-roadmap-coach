@@ -4,6 +4,10 @@ Small Express and vanilla JavaScript app that now starts from a free-text goal, 
 
 Package name: `goal-roadmap-coach`
 
+Runtime baseline:
+
+- Node.js `20.x`
+
 ## Product direction
 
 The app is no longer framed as a generic progress-scoring demo. Its current purpose is to:
@@ -196,13 +200,8 @@ Timeouts:
 1. Install dependencies:
 
    ```bash
-   npm install
-   ```
-
-   Recommended Node version:
-
-   ```bash
    nvm use
+   npm install
    ```
 
 2. Start the app:
@@ -236,7 +235,7 @@ Timeouts:
 - The test runner is custom because the observed local Node runtime is old and does not support `node --test`.
 - Browser DOM behavior is not yet covered by automated tests, so UI changes still need manual verification.
 - The current result is still deterministic and point-based. That is intentional while mocking the full flow.
-- The deterministic mock provider remains the default fallback for both planning and results.
+- Mock providers remain the local development default, but Ollama request failures no longer fall back silently.
 - The question normalizer now tolerates dynamic keys and missing options by synthesizing renderable multiple-choice options.
 - The suggestion normalizer now accepts both structured resource arrays and compact key/value resource maps.
 - The result UI intentionally hides provider/fallback labels even when repaired or fallback-backed output is used internally.
