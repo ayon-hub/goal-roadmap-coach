@@ -24,9 +24,9 @@ Project type:
 - Mixed runtime in one app process
 - Custom test runner exists
 - Root `.gitignore` now exists
-- No GitHub workflow defined
-- No linting, formatting, or code coverage setup
-- No pre-commit or commit message hooks
+- GitHub workflow is defined locally and ready to push
+- Linting, formatting, and code coverage are set up
+- Pre-commit and commit message hooks are set up
 - No frontend/backend separation at repo layout or build level
 - No TypeScript
 - No deployment, observability, or security baseline yet
@@ -37,9 +37,9 @@ Current focus:
 
 Next immediate step:
 
-1. Add GitHub Actions CI for install, lint, test, and coverage.
-2. Keep GitHub remote and branch protection as the remaining external M1 closeout.
-3. Make CI required on `main` once GitHub branch protection is active.
+1. Connect the repo to GitHub and push the workflow.
+2. Make the CI workflow a required status check on `main`.
+3. Start M5 after CI is running on GitHub.
 
 ## Milestone Tracker
 
@@ -48,7 +48,7 @@ Next immediate step:
 | M1  | Repository and source-control baseline        | IN_PROGRESS | Without real version control, nothing else is safely manageable     |
 | M2  | Project hygiene baseline                      | DONE        | Ignore generated files, standardize Node/tooling, reduce repo noise |
 | M3  | Linting, formatting, tests, coverage, hooks   | DONE        | Enforce basic quality before every commit                           |
-| M4  | CI on GitHub                                  | NOT_STARTED | Quality checks must run in a clean environment                      |
+| M4  | CI on GitHub                                  | IN_PROGRESS | Quality checks must run in a clean environment                      |
 | M5  | Frontend/backend separation                   | NOT_STARTED | Needed before production-grade scaling and TypeScript migration     |
 | M6  | TypeScript migration                          | NOT_STARTED | Improves maintainability, contracts, and refactoring safety         |
 | M7  | Configuration and secrets management          | NOT_STARTED | Production apps need predictable environment handling               |
@@ -62,7 +62,7 @@ Next immediate step:
 
 ### M1 - Repository and source-control baseline
 
-Status: `DONE`
+Status: `IN_PROGRESS`
 
 Scope:
 
@@ -158,7 +158,7 @@ Progress:
 
 ### M3 - Linting, formatting, tests, coverage, hooks
 
-Status: `IN_PROGRESS`
+Status: `DONE`
 
 Scope:
 
@@ -226,7 +226,7 @@ Progress:
 
 ### M4 - CI on GitHub
 
-Status: `NOT_STARTED`
+Status: `IN_PROGRESS`
 
 Scope:
 
@@ -248,6 +248,15 @@ Nice to have:
 
 - dependency caching
 - matrix for supported Node versions
+
+Progress:
+
+- DONE: GitHub Actions workflow added at `.github/workflows/ci.yml`
+- DONE: workflow runs install, lint, format check, tests, and coverage
+- DONE: npm dependency caching added through `actions/setup-node`
+- DONE: coverage artifact upload added
+- BLOCKED: workflow cannot run until the repository is connected to GitHub and pushed
+- BLOCKED: required status checks must still be configured in GitHub branch protection
 
 ### M5 - Frontend/backend separation
 
@@ -543,6 +552,7 @@ Use this section to record actual movement.
 | 2026-04-17 | M1        | Created initial baseline commit on `main`                                                           | DONE   |
 | 2026-04-17 | M2        | Formalized repo hygiene with Node version pinning, line-ending policy, and package metadata cleanup | DONE   |
 | 2026-04-17 | M3        | Added linting, formatting, coverage, and Git hooks and verified all quality commands pass           | DONE   |
+| 2026-04-17 | M4        | Added GitHub Actions CI workflow for install, lint, format check, tests, and coverage               | DONE   |
 
 ## Notes and Risks
 

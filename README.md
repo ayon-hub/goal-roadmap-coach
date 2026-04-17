@@ -8,6 +8,10 @@ Runtime baseline:
 
 - Node.js `20.x`
 
+CI baseline:
+
+- GitHub Actions runs install, lint, format check, tests, and coverage on push and pull request
+
 ## Product direction
 
 The app is no longer framed as a generic progress-scoring demo. Its current purpose is to:
