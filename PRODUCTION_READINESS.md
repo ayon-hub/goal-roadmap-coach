@@ -355,7 +355,8 @@ Progress:
 - DONE: backend app-config response boundary migrated to TypeScript source with a compatibility shim
 - DONE: backend JSON response handler boundary migrated to TypeScript source with a compatibility shim
 - DONE: backend root document response boundary migrated to TypeScript source with a compatibility shim
-- TODO: migrate the backend app creation boundary or route DTO mappers to TypeScript next
+- DONE: backend request and route input normalization migrated to TypeScript source with a compatibility shim
+- TODO: migrate the backend app creation boundary next, now that route payload normalization is extracted
 
 ### M7 - Configuration and secrets management
 

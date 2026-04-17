@@ -17,6 +17,7 @@
     "shared/types/**/*.ts",
     "shared/config/publicAppConfig.ts",
     "backend/src/application/progress/providerFailure.ts",
+    "backend/src/infrastructure/http/getProgressRequestInput.ts",
     "backend/src/infrastructure/http/sendError.ts",
     "backend/src/infrastructure/http/sendPublicAppConfig.ts",
     "backend/src/infrastructure/http/sendJsonResult.ts",

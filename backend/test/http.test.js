@@ -172,6 +172,56 @@ module.exports = [
     }
   },
   {
+    name: "progress API normalizes malformed route and body input at the HTTP boundary",
+    async run() {
+      process.env.RESULT_PROVIDER = "mock";
+      process.env.PLANNING_PROVIDER = "mock";
+      process.env.SUGGESTION_PROVIDER = "mock";
+
+      const app = createApp();
+      const server = await new Promise((resolve, reject) => {
+        const instance = app.listen(0, "127.0.0.1", () => {
+          resolve(instance);
+        });
+
+        instance.on("error", reject);
+      });
+      const port = server.address().port;
+
+      try {
+        const goalPlanResponse = await requestJson(port, "/api/progress/goal-plan", "POST", {
+          goalText: 123
+        });
+        assert.strictEqual(goalPlanResponse.statusCode, 200);
+        assert.strictEqual(goalPlanResponse.body.goal.requestedGoalText, "");
+
+        const suggestionResponse = await requestJson(port, "/api/progress/suggestions", "POST", []);
+        assert.strictEqual(suggestionResponse.statusCode, 200);
+        assert.strictEqual(Array.isArray(suggestionResponse.body.profile.positiveFactors), true);
+
+        const evaluationResponse = await requestJson(
+          port,
+          "/api/progress/evaluations",
+          "POST",
+          null
+        );
+        assert.strictEqual(evaluationResponse.statusCode, 200);
+        assert.strictEqual(typeof evaluationResponse.body.score, "number");
+      } finally {
+        await new Promise((resolve, reject) => {
+          server.close((error) => {
+            if (error) {
+              reject(error);
+              return;
+            }
+
+            resolve();
+          });
+        });
+      }
+    }
+  },
+  {
     name: "app config endpoint exposes a configurable API base url for the separated frontend",
     async run() {
       process.env.PUBLIC_API_BASE_URL = "https://api.example.com";

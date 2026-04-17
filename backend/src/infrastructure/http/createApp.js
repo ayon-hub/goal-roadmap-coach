@@ -2,6 +2,12 @@
 
 const express = require("express");
 const path = require("path");
+const {
+  getGoalKeyInput,
+  getGoalTextInput,
+  getSuggestionInput,
+  getEvaluationInput
+} = require("./getProgressRequestInput");
 const { sendIndexHtml } = require("./sendIndexHtml");
 const { sendPublicAppConfig } = require("./sendPublicAppConfig");
 const { sendJsonResult } = require("./sendJsonResult");
@@ -38,25 +44,22 @@ function createApp() {
 
   /** @param {Request} req @param {Response} res */
   app.get("/api/progress/goals/:goalKey", (req, res) => {
-    sendJsonResult(res, getGoalExperience(req.params.goalKey));
+    sendJsonResult(res, getGoalExperience(getGoalKeyInput(req.params)));
   });
 
   /** @param {Request} req @param {Response} res */
   app.post("/api/progress/goal-plan", (req, res) => {
-    sendJsonResult(
-      res,
-      getGoalExperienceFromText(req.body && req.body.goalText ? req.body.goalText : "")
-    );
+    sendJsonResult(res, getGoalExperienceFromText(getGoalTextInput(req.body)));
   });
 
   /** @param {Request} req @param {Response} res */
   app.post("/api/progress/suggestions", (req, res) => {
-    sendJsonResult(res, buildSuggestedProfile(req.body || {}));
+    sendJsonResult(res, buildSuggestedProfile(getSuggestionInput(req.body)));
   });
 
   /** @param {Request} req @param {Response} res */
   app.post("/api/progress/evaluations", (req, res) => {
-    sendJsonResult(res, evaluateProfile(req.body || { positiveFactors: [], constraints: [] }));
+    sendJsonResult(res, evaluateProfile(getEvaluationInput(req.body)));
   });
 
   /** @param {Request} req @param {Response} res */
