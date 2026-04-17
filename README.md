@@ -12,6 +12,7 @@ CI baseline:
 
 - GitHub Actions runs install, lint, format check, tests, and coverage on push and pull request
 - frontend, backend, and shared runtime config are separated physically
+- TypeScript is introduced at shared boundaries first through typed contracts and `typecheck`
 
 ## Product direction
 
@@ -62,6 +63,12 @@ goal-roadmap-coach/
 - `shared/` owns runtime configuration that both layers depend on
 - the frontend reads `window.__APP_CONFIG__.apiBaseUrl`, served by the backend at `/app-config.js`
 - `backend/package.json` and `frontend/package.json` define local scripts for each side
+
+## Typed contracts
+
+- `shared/contracts/` contains the first TypeScript API contract layer
+- `shared/types/` contains shared runtime configuration types
+- `tsconfig.json` currently typechecks the shared TypeScript boundary only
 
 ## Current flow
 
@@ -239,6 +246,7 @@ Timeouts:
    npm run lint
    npm run format:check
    npm run coverage
+   npm run typecheck
    ```
 
 5. Open:

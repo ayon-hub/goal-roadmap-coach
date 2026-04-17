@@ -28,7 +28,7 @@ Project type:
 - Linting, formatting, and code coverage are set up
 - Pre-commit and commit message hooks are set up
 - Frontend, backend, and shared runtime config are separated physically
-- No TypeScript
+- TypeScript is introduced at the shared boundary with `typecheck`
 - No deployment, observability, or security baseline yet
 
 Current focus:
@@ -50,7 +50,7 @@ Next immediate step:
 | M3  | Linting, formatting, tests, coverage, hooks   | DONE        | Enforce basic quality before every commit                           |
 | M4  | CI on GitHub                                  | IN_PROGRESS | Quality checks must run in a clean environment                      |
 | M5  | Frontend/backend separation                   | DONE        | Needed before production-grade scaling and TypeScript migration     |
-| M6  | TypeScript migration                          | NOT_STARTED | Improves maintainability, contracts, and refactoring safety         |
+| M6  | TypeScript migration                          | IN_PROGRESS | Improves maintainability, contracts, and refactoring safety         |
 | M7  | Configuration and secrets management          | NOT_STARTED | Production apps need predictable environment handling               |
 | M8  | API contracts and validation                  | NOT_STARTED | Prevent invalid input and undefined runtime behavior                |
 | M9  | Error handling, logging, and observability    | NOT_STARTED | Production failures need traceability                               |
@@ -260,7 +260,7 @@ Progress:
 
 ### M5 - Frontend/backend separation
 
-Status: `IN_PROGRESS`
+Status: `DONE`
 
 Scope:
 
@@ -312,7 +312,7 @@ Progress:
 
 ### M6 - TypeScript migration
 
-Status: `NOT_STARTED`
+Status: `IN_PROGRESS`
 
 Scope:
 
@@ -340,6 +340,16 @@ Guidelines:
 - Avoid a big-bang rewrite
 - Use strict mode
 - Prefer explicit types at boundaries
+
+Progress:
+
+- DONE: TypeScript compiler added
+- DONE: `tsconfig.json` added with strict, no-emit typechecking
+- DONE: `npm run typecheck` added and passes
+- DONE: shared API request and response contracts added under `shared/contracts/`
+- DONE: shared runtime config type added under `shared/types/`
+- TODO: migrate shared runtime config implementation from JavaScript to TypeScript
+- TODO: migrate backend API boundary modules to TypeScript next
 
 ### M7 - Configuration and secrets management
 
@@ -566,6 +576,7 @@ Use this section to record actual movement.
 | 2026-04-17 | M3        | Added linting, formatting, coverage, and Git hooks and verified all quality commands pass            | DONE   |
 | 2026-04-17 | M5        | Split the repository into frontend, backend, and shared runtime layers and verified the quality gate | DONE   |
 | 2026-04-17 | M4        | Added GitHub Actions CI workflow for install, lint, format check, tests, and coverage                | DONE   |
+| 2026-04-17 | M6        | Added TypeScript typechecking and shared typed contracts as the first migration boundary             | DONE   |
 
 ## Notes and Risks
 
