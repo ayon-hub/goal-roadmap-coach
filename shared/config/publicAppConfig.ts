@@ -1,7 +1,6 @@
-// Runtime compatibility shim.
-// Keep this file aligned with publicAppConfig.ts until the backend runtime is built from TypeScript.
+import type { PublicAppConfig } from "../types/publicAppConfig";
 
-function normalizeApiBaseUrl(value) {
+export function normalizeApiBaseUrl(value: string | undefined | null): string {
   const normalized = String(value || "").trim();
 
   if (!normalized) {
@@ -11,7 +10,7 @@ function normalizeApiBaseUrl(value) {
   return normalized.replace(/\/+$/, "");
 }
 
-function getPublicAppConfig() {
+export function getPublicAppConfig(): PublicAppConfig {
   return {
     apiBaseUrl: normalizeApiBaseUrl(
       process.env.PUBLIC_API_BASE_URL || process.env.API_BASE_URL || ""
@@ -19,12 +18,6 @@ function getPublicAppConfig() {
   };
 }
 
-function toPublicConfigScript(config) {
+export function toPublicConfigScript(config: PublicAppConfig): string {
   return `window.__APP_CONFIG__ = Object.freeze(${JSON.stringify(config)});\n`;
 }
-
-module.exports = {
-  normalizeApiBaseUrl,
-  getPublicAppConfig,
-  toPublicConfigScript
-};

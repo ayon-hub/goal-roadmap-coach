@@ -15,6 +15,6 @@
   "include": [
     "shared/contracts/**/*.ts",
     "shared/types/**/*.ts",
-    "shared/config/publicAppConfig.js"
+    "shared/config/publicAppConfig.ts"
   ]
 }
