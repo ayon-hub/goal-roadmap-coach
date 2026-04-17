@@ -69,6 +69,7 @@ goal-roadmap-coach/
 - `shared/contracts/` contains the first TypeScript API contract layer
 - `shared/types/` contains shared runtime configuration types
 - `tsconfig.json` currently typechecks the shared TypeScript boundary only
+- `shared/config/publicAppConfig.js` is now covered by TypeScript `checkJs` with JSDoc types
 
 ## Current flow
 

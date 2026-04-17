@@ -1,3 +1,11 @@
+// @ts-check
+
+/** @typedef {import("../types/publicAppConfig").PublicAppConfig} PublicAppConfig */
+
+/**
+ * @param {string | undefined | null} value
+ * @returns {string}
+ */
 function normalizeApiBaseUrl(value) {
   const normalized = String(value || "").trim();
 
@@ -8,6 +16,9 @@ function normalizeApiBaseUrl(value) {
   return normalized.replace(/\/+$/, "");
 }
 
+/**
+ * @returns {PublicAppConfig}
+ */
 function getPublicAppConfig() {
   return {
     apiBaseUrl: normalizeApiBaseUrl(
@@ -16,6 +27,10 @@ function getPublicAppConfig() {
   };
 }
 
+/**
+ * @param {PublicAppConfig} config
+ * @returns {string}
+ */
 function toPublicConfigScript(config) {
   return `window.__APP_CONFIG__ = Object.freeze(${JSON.stringify(config)});\n`;
 }

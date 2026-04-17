@@ -348,7 +348,7 @@ Progress:
 - DONE: `npm run typecheck` added and passes
 - DONE: shared API request and response contracts added under `shared/contracts/`
 - DONE: shared runtime config type added under `shared/types/`
-- TODO: migrate shared runtime config implementation from JavaScript to TypeScript
+- DONE: shared runtime config JavaScript is covered by TypeScript `checkJs` and JSDoc typing
 - TODO: migrate backend API boundary modules to TypeScript next
 
 ### M7 - Configuration and secrets management
