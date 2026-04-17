@@ -15,6 +15,7 @@
   "include": [
     "shared/contracts/**/*.ts",
     "shared/types/**/*.ts",
-    "shared/config/publicAppConfig.ts"
+    "shared/config/publicAppConfig.ts",
+    "backend/src/application/progress/providerFailure.ts"
   ]
 }

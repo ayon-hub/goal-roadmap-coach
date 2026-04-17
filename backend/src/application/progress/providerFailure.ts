@@ -1,7 +1,11 @@
-// Runtime compatibility shim.
-// Keep this file aligned with providerFailure.ts until backend runtime compilation is introduced.
+export interface ProviderFailure extends Error {
+  code: "PROVIDER_FAILURE";
+  statusCode: number;
+  userMessage: string;
+  details: string;
+}
 
-function toErrorMessage(error) {
+function toErrorMessage(error: unknown): string {
   if (!error) {
     return "Unknown provider error";
   }
@@ -13,14 +17,18 @@ function toErrorMessage(error) {
   return String(error);
 }
 
-function createProviderFailure(stage, providerName, error) {
+export function createProviderFailure(
+  stage: string | undefined,
+  providerName: string,
+  error: unknown
+): ProviderFailure {
   const providerLabel = providerName === "ollama" ? "Ollama" : "AI provider";
   const details = toErrorMessage(error);
   const failure = new Error(
     `${providerLabel} could not complete the ${
       stage || "request"
     }. Check that the service is running and try again.`
-  );
+  ) as ProviderFailure;
 
   failure.name = "ProviderFailure";
   failure.code = "PROVIDER_FAILURE";
@@ -30,7 +38,3 @@ function createProviderFailure(stage, providerName, error) {
 
   return failure;
 }
-
-module.exports = {
-  createProviderFailure
-};

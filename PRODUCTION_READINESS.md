@@ -350,7 +350,8 @@ Progress:
 - DONE: shared runtime config type added under `shared/types/`
 - DONE: shared runtime config implementation now exists as real TypeScript source
 - DONE: JavaScript runtime shim is kept temporarily for compatibility without a TS build step
-- TODO: migrate backend API boundary modules to TypeScript next
+- DONE: first backend module migrated to TypeScript source with a compatibility shim
+- TODO: migrate the backend HTTP boundary modules to TypeScript next
 
 ### M7 - Configuration and secrets management
 
@@ -579,6 +580,7 @@ Use this section to record actual movement.
 | 2026-04-17 | M4        | Added GitHub Actions CI workflow for install, lint, format check, tests, and coverage                | DONE   |
 | 2026-04-17 | M6        | Added TypeScript typechecking and shared typed contracts as the first migration boundary             | DONE   |
 | 2026-04-17 | M6        | Converted shared runtime config to TypeScript source while keeping a runtime compatibility shim      | DONE   |
+| 2026-04-17 | M6        | Migrated the provider-failure backend module to TypeScript source with a compatibility shim          | DONE   |
 
 ## Notes and Risks
 

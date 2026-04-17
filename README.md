@@ -70,6 +70,7 @@ goal-roadmap-coach/
 - `shared/types/` contains shared runtime configuration types
 - `shared/config/publicAppConfig.ts` is now the typed source of truth for shared runtime config
 - `shared/config/publicAppConfig.js` remains as a temporary runtime shim until backend runtime compilation exists
+- `backend/src/application/progress/providerFailure.ts` is the first backend module migrated to TypeScript source
 
 ## Current flow
 
